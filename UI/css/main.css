@@ -1,7 +1,6 @@
 body {
     margin: 0;
     font-family: Helvetica, sans-serif;
-    background-color: #bbb;
 }
 
 a {
@@ -13,9 +12,7 @@ a {
 .header {
     background-color: #fff;
     box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
-    position: fixed;
     width: 100%;
-    z-index: 3;
 }
 
 .header ul {
@@ -129,4 +126,45 @@ a {
     .header .menu-icon {
         display: none;
     }
+    #banner {
+        clear: both;
+        background-size: auto;
+    }
+}
+
+/* banner */
+
+#banner {
+    min-height: 80vh;
+    background: linear-gradient(rgba(0, 0, 255, 0.2), rgba(98, 98, 240, 0.178)), url("../img/headerbg.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --------end of banner----- */
+
+footer {
+    padding: 20px;
+    margin-top: 20px;
+    color: #ffffff;
+    background-color: #0b0c0c;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+footer p a {
+    text-decoration: none;
+    color: white;
+}
+
+footer p a:hover {
+    color: #20c063;
+    background: #f4f4f4;
 }
