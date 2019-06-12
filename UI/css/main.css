@@ -149,6 +149,7 @@ a {
         clear: both;
         background-size: auto;
     }
+
 }
 
 .container {
@@ -193,6 +194,55 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.main-form {
+    max-width: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 80px auto auto auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+    position: absolute;
+    top: 5px;
+    left: 20px;
+}
+
+fieldset {
+    border: none;
+}
+
+legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"] {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: rgba(255, 255, 255, .1);
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #e8eeef;
+    color: #8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    margin-bottom: 30px;
+}
+
+input[type="text"] {
+    background: #d2d9dd;
 }
 
 /* --------end of banner----- */
