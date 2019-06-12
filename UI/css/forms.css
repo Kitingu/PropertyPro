@@ -1,0 +1,29 @@
+html{
+    font-size: 80%;
+}
+
+.form-main{
+    height: 78vh;
+    margin: auto;
+    margin-top: 20px;
+    clear: both;
+    max-width: 400px;
+}
+.form-main a{
+    margin-left: 20px;
+}
+.form-main legend{
+    font-weight: 700;
+    color: #101d2c;
+    text-align: center;
+}
+.btn-primary{
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 1.2rem;
+    background-color: #101d2c;
+    color: #fff;
+    font-weight: 400;
+    border-radius: 15px;
+    border: 0;
+}

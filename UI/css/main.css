@@ -223,7 +223,7 @@ label {
     margin-bottom: 8px;
 }
 
-input[type="text"] {
+input[type="text"],input[type="email"],input[type="password"] {
     font-family: Georgia, "Times New Roman", Times, serif;
     background: rgba(255, 255, 255, .1);
     border: none;
@@ -241,7 +241,7 @@ input[type="text"] {
     margin-bottom: 30px;
 }
 
-input[type="text"] {
+input[type="text"],input[type="email"],input[type="password"] {
     background: #d2d9dd;
 }
 
