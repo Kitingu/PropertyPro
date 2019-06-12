@@ -20,25 +20,26 @@
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
         <ul class="menu">
-            <li><a href="#">Log in</a></li>
-            <li><a href="#"> Sign up</a></li>
+            <li><a href="login.html">Log in</a></li>
+            <li><a href="signup.html"> Sign up</a></li>
         </ul>
     </header>
 
     <form class="form-main">
         <fieldset>
             <legend>Welcome to PropertyPro</legend>
-            <label for="firstname"> First name</label>
-            <input type="text" name="firstname" id="firstname" required>
 
-            <label for="lastname">Last name </label>
-            <input type="text" id="lastname" required>
+            <input type="text" placeholder="First name" name="firstname" id="firstname" required>
 
-            <label for="email">Email </label>
-            <input type="email" id="email">
+            <input type="text" placeholder="Last name" id="lastname" required>
 
-            <label for="password">Password </label>
-            <input type="password" id="password" required>
+            <input type="email" placeholder="Email" id="email">
+
+            <input type="password" placeholder="Password" id="password" required>
+
+            <input type="text" placeholder="Phone number" id="phone" required>
+
+            <input type="text" placeholder="Address" id="address" required>
 
             </div>
             <button class="btn-primary" type="submit">Sign Up</button>
@@ -49,10 +50,8 @@
     </form>
 
 
-
-
     <footer>
-        <p>Design by <a href="github.com/kitingu">Kitingu</a>, Copyright &copy; <span id="year"></span></p>
+        <p>Design by <a href="github.com/kitingu">Kitingu</a> Copyright &copy; <span id="year"></span></p>
     </footer>
     <script src="./scripts/main.js"></script>
 </body>
