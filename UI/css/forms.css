@@ -2,6 +2,10 @@ html {
     font-size: 80%;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .form-main {
     height: 78vh;
     box-sizing: border-box;
@@ -41,5 +45,4 @@ html {
     margin-top: 30px;
     bottom: 0;
     right: 0;
-    /* z-index: -1; */
 }
