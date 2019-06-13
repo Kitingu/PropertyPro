@@ -2,6 +2,10 @@ html {
     font-size: 80%;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .form-main {
     height: 78vh;
     box-sizing: border-box;
@@ -41,5 +45,73 @@ html {
     margin-top: 30px;
     bottom: 0;
     right: 0;
-    /* z-index: -1; */
+}
+
+.advert form {
+    clear: both;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    max-width: 60%;
+    margin: auto;
+}
+
+.advert h3 {
+    text-align: center;
+    margin: 20px;
+    text-transform: uppercase;
+    color: #101d2c;
+}
+
+.advert form label {
+    display: block;
+}
+
+.advert form p {
+    margin: 0;
+}
+
+.advert form .full {
+    grid-column: 1 / 3;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn-upload {
+    border: 1px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 20px;
+    margin: auto;
+    font-weight: 400;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 50px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+@media(max-width:35rem) {
+    .advert form {
+        clear: both;
+        display: grid;
+        grid-template-columns: 1fr;
+        padding-bottom: 100px;
+    }
+}
+
+@media(min-width:600px) {
+    .advert, .advert form {
+        clear: both;
+        padding-bottom: 50px;
+    }
 }
