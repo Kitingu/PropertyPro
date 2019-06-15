@@ -14,12 +14,6 @@ html {
     font-size: 60%;
 }
 
-@media only screen and (max-width: 75em) {
-    html {
-        /* font-size: 14px; */
-    }
-}
-
 a {
     color: #B28451;
 }
@@ -256,6 +250,20 @@ input[type="text"], input[type="email"], input[type="password"] {
     padding: 1.8rem 3rem;
     cursor: pointer;
     transition: all .2s;
+}
+
+.btn-delete {
+    background-color: #be1010;
+    color: #fff;
+    border: none;
+    border-radius: 5%;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding: 1.2rem 2rem;
+    cursor: pointer;
+    transition: all .2s;
+    margin: 10px;
 }
 
 .btn:hover {
