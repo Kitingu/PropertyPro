@@ -30,14 +30,17 @@ html {
 }
 
 .btn-primary {
-    font-size: 1.6rem;
-    text-align: center;
-    padding: 1.2rem;
     background-color: #101d2c;
     color: #fff;
-    font-weight: 400;
-    border-radius: 15px;
-    border: 0;
+    border: none;
+    border-radius: 5%;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding: 1.2rem 2rem;
+    cursor: pointer;
+    transition: all .2s;
+    margin: 10px;
 }
 
 .fixed {
@@ -121,7 +124,7 @@ html {
     clear: both;
     position: absolute;
     z-index: 1;
-    padding-top: 1%;
+    padding-top: 5%;
     top: 0;
     left: 20px;
     right: 0;
@@ -129,18 +132,37 @@ html {
     background: #fff;
 }
 
-.modal form {}
-
-.close {
+.close, .close-delete {
     color: #cf2525;
     float: right;
     font-size: 28px;
     font-weight: bold;
     margin-right: 20%;
+    cursor: pointer;
 }
 
 .close:hover, .close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.delete-modal {
+    clear: both;
+    max-width: 500px;
+    display: none;
+}
+
+.delete-modal p {
+    /* margin: auto; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media(max-width:400px) {
+    .delete-modal p {
+        flex-direction: column;
+        margin: auto;
+    }
 }
