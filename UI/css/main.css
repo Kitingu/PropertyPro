@@ -11,12 +11,12 @@ body {
 
 html {
     box-sizing: border-box;
-    font-size: 62.5%;
+    font-size: 60%;
 }
 
 @media only screen and (max-width: 75em) {
     html {
-        font-size: 14px;
+        /* font-size: 14px; */
     }
 }
 
@@ -149,13 +149,12 @@ a {
         clear: both;
         background-size: auto;
     }
-
 }
 
 .container {
     display: grid;
     grid-template-rows: repeat(3, min-content);
-    grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+    grid-template-columns: minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
 }
 
 @media only screen and (max-width: 62.5em) {
@@ -202,11 +201,10 @@ a {
     background: #f4f7f8;
     margin: 80px auto auto auto;
     padding: 20px;
-    background: #f4f7f8;
+    background: t;
     border-radius: 8px;
-    position: absolute;
-    top: 5px;
-    left: 20px;
+    position: relative;
+    margin: auto;
 }
 
 fieldset {
@@ -223,7 +221,7 @@ label {
     margin-bottom: 8px;
 }
 
-input[type="text"],input[type="email"],input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"] {
     font-family: Georgia, "Times New Roman", Times, serif;
     background: rgba(255, 255, 255, .1);
     border: none;
@@ -241,7 +239,7 @@ input[type="text"],input[type="email"],input[type="password"] {
     margin-bottom: 30px;
 }
 
-input[type="text"],input[type="email"],input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"] {
     background: #d2d9dd;
 }
 

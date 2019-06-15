@@ -115,3 +115,32 @@ html {
         padding-bottom: 50px;
     }
 }
+
+.modal {
+    display: none;
+    clear: both;
+    position: absolute;
+    z-index: 1;
+    padding-top: 1%;
+    top: 0;
+    left: 20px;
+    right: 0;
+    margin: auto;
+    background: #fff;
+}
+
+.modal form {}
+
+.close {
+    color: #cf2525;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: 20%;
+}
+
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}

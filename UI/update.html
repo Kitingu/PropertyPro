@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Property Pro</title>
+
+    <!-- css links -->
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/forms.css">
+    <link rel="stylesheet" href="./css/tables.css">
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">PROPERTY PRO</a>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
+        <ul class="menu">
+            <li><a href="adverts.html">Create Advert</a></li>
+            <li><a href="login.html">Log in</a></li>
+            <li><a href="signup.html"> Sign up</a></li>
+        </ul>
+    </header>
+    <div class="profile">
+        <div class="user-details">
+            <img src="./img/profile.jpg" alt="">
+        </div>
+
+        <div class="box">
+            <p>Name: <span>Joseph Arimathea</span> </p>
+            <p>Email: <span>jose@gmail.com</span></p>
+            <p>Nationality: <span>Kenyan</span></p>
+            <p>Properties posted<span> 50</span></p>
+            <p>Properties Sold<span> 20</span></p>
+            <p>Total Amount Sold<span> $29000000</span></p>
+        </div>
+    </div>
+    <table class="orders">
+        <caption> All Orders</caption>
+        <thead>
+            <tr>
+                <th>Property id</th>
+                <th>Owner</th>
+                <th>Status</th>
+                <th>Price</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Type</th>
+                <th>Sold</th>
+                <th colspan="2">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Property id">1</td>
+                <td data-label="Owner">Joseph Arimathea</td>
+                <td data-label="Status">Ok</td>
+                <td data-label="Price">$5000</td>
+                <td data-label="City"> Arusha</td>
+                <td data-label="Address">010-90100</td>
+                <td data-label="Type">Two Bedroom</td>
+                <td data-label="Sold?"> <input type="checkbox" value="sold" name="sold"> </td>
+                <td colspan="2"><button onClick="location.href='specific_ad.html'" class="sign">View</button>
+                    <button class="sign" onclick="update()">Edit</button>
+                    <button class="sign">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-label="Property id">1</td>
+                <td data-label="Owner">Joseph Arimathea</td>
+                <td data-label="Status">Ok</td>
+                <td data-label="Price">$5000</td>
+                <td data-label="City"> Arusha</td>
+                <td data-label="Address">010-90100</td>
+                <td data-label="Type">Two Bedroom</td>
+                <td data-label="Sold?"> <input type="checkbox" value="sold" name="sold"> </td>
+                <td colspan="2"><button onClick="location.href='specific_ad.html'" class="sign">View</button>
+                    <button class="sign" onclick="update()">Edit</button>
+                    <button class="sign">Delete</button>
+                </td>
+
+            </tr>
+            <tr>
+                <td data-label="Property id">1</td>
+                <td data-label="Owner">Joseph Arimathea</td>
+                <td data-label="Status">Ok</td>
+                <td data-label="Price">$5000</td>
+                <td data-label="City"> Arusha</td>
+                <td data-label="Address">010-90100</td>
+                <td data-label="Type">Two Bedroom</td>
+                <td data-label="Sold?"> <input type="checkbox" checked value="sold" name="sold"> </td>
+                <td colspan="2"><button onClick="location.href='specific_ad.html'" class="sign">View</button>
+                    <button class="sign" onclick="update()">Edit</button>
+                    <button class="sign">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-label="Property id">1</td>
+                <td data-label="Owner">Joseph Arimathea</td>
+                <td data-label="Status">Ok</td>
+                <td data-label="Price">$5000</td>
+                <td data-label="City"> Arusha</td>
+                <td data-label="Address">010-90100</td>
+                <td data-label="Type">Two Bedroom</td>
+                <td data-label="Sold?"> <input type="checkbox" value="sold" name="sold"> </td>
+                <td colspan="2"><button onClick="location.href='specific_ad.html'" class="sign">View</button>
+                    <button class="sign" onclick="update()">Edit</button>
+                    <button class="sign">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-label="Property id">1</td>
+                <td data-label="Owner">Joseph Arimathea</td>
+                <td data-label="Status">Ok</td>
+                <td data-label="Price">$5000</td>
+                <td data-label="City"> Arusha</td>
+                <td data-label="Address">010-90100</td>
+                <td data-label="Type">Two Bedroom</td>
+                <td data-label="Sold?"> <input type="checkbox" checked value="sold" name="sold"> </td>
+                <td colspan="2"><button onClick="location.href='specific_ad.html'" class="sign">View</button>
+                    <button  class="sign" onclick="update()">Edit</button>
+                    <button class="sign">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+
+
+
+    </table>
+
+
+    <div class="modal advert">
+        <span class="close">&times;</span>
+        <h3>Update advert</h3>
+        <form>
+
+            <p>
+                <label for="price"> Price</label>
+                <input type="text" value="$250000" name="price">
+            </p>
+            <p>
+                <label for="state"> State</label>
+                <input type="text" value="Tanzania" name="state">
+            </p>
+            <p>
+                <label for="city">City</label>
+                <input type="text" value="Arusha" name="city">
+            </p>
+            <p>
+                <label for="address">Address</label>
+                <input type="text" value="1010-90100" name="address">
+            </p>
+            <p>
+                <label for="phone">Contact</label>
+                <input type="text" value="+254841415118" name="contact">
+            </p>
+
+            <p>
+                <label for="additional-info">Additional-info</label>
+                <input type="text" value="Its a comfortable in a serene environment" name="additional-info">
+            </p>
+            <div class="upload-btn-wrapper">
+                <button class="btn-upload">Upload picture</button>
+                <input type="file" name="myfile" />
+            </div>
+            <p>
+                <button class="btn">Submit</button>
+            </p>
+        </form>
+    </div>
+
+
+    <footer >
+        <p>Design by <a href="github.com/kitingu">Kitingu</a> Copyright &copy; <span id="year"></span></p>
+    </footer>
+    <script src="./scripts/main.js"></script>
+</body>
+
+</html>

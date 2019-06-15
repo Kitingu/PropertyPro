@@ -1,0 +1,111 @@
+table {
+    border: 1px solid #fff;
+    border-collapse: collapse;
+    padding-bottom: 200px;
+    width: 95%;
+    table-layout: fixed;
+    margin: 4% auto;
+}
+
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+    color: #c69963;
+}
+
+table tr {
+    background-color: #fff;
+    padding: .35em;
+}
+
+table th, table td {
+    padding: .625em;
+    text-align: center;
+}
+
+.sign {
+    background-color: #101d2c;
+    color: #fff;
+    padding: 10px 10px;
+    font-size: 1em;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+
+    opacity: 0.9;
+}
+
+
+.select {
+    background-color: #e0e2db;
+    color: #000000;
+    border: none;
+    font-size: 1em;
+    padding: 10px 6px;
+}
+
+table th {
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin: 2px;
+}
+table #tb-checkbox{
+    clear: both;
+    position: relative;
+    padding: 15px;
+    color: #000;
+}
+
+@media screen and (max-width: 900px) {
+    table {
+        border: 0;
+    }
+    table th, table td {
+        padding: .500rem;
+        text-align: center;
+    }
+    table caption {
+        font-size: 1.3em;
+    }
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    table tr {
+        border-bottom: 3px solid #101d2c;
+        display: block;
+        margin-bottom: .625em;
+    }
+    .sign {
+        width: 30%;
+        font-size: 1em;
+        padding: 10px 6px;
+    }
+    .cancel-btn {
+        width: 30%;
+        font-size: 1em;
+        padding: 10px 6px;
+    }
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    table td:last-child {
+        border-bottom: 10;
+    }
+}
