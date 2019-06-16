@@ -5,6 +5,7 @@ table {
     width: 95%;
     table-layout: fixed;
     margin: 4% auto;
+    font-size: 1.3em;
 }
 
 table caption {

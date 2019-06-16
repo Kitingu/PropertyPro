@@ -1,0 +1,86 @@
+.filter {
+    clear: both;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter p {
+    color: #000;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+
+@media(max-width:600px) {
+    .filter {
+        flex-direction: column;
+    }
+}
+
+.custom-select {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    padding: 0;
+    overflow: hidden;
+    background: #fff;
+    color: #101d2c;
+    border: 1px solid #101d2c;
+    text-shadow: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -moz-transition: box-shadow 0.25s ease;
+    -o-transition: box-shadow 0.25s ease;
+    -webkit-transition: box-shadow 0.25s ease;
+    transition: box-shadow 0.25s ease;
+}
+
+.custom-select:hover {
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.custom-select:before {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    pointer-events: none;
+}
+
+.custom-select select {
+    cursor: pointer;
+    padding: 0.5em;
+    padding-right: 2em;
+    width: 130%;
+    border: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    width: 160% \9;
+}
+
+.custom-select select:focus {
+    outline: none;
+}
+
+.custom-select:before {
+    font-family: "icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.icon--down:before, .select:before {
+    content: "\e600";
+}
