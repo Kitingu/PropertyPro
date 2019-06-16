@@ -9,6 +9,8 @@
 
     <!-- css links -->
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="css/filter.css">
+    <link rel="stylesheet" href="css/forms.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -25,7 +27,20 @@
             <li><a href="signup.html"> Sign up</a></li>
         </ul>
     </header>
+    <div class="filter">
+        <p>Filter By:</p>
+        <div class="custom-select">
 
+
+            <select name="filter-by-type" id="filter">
+                <option selected value="view-all">View All</option>
+                <option value="two-bedroom">Two Bedroom</option>
+                <option value="three-bedroom">Three Bedroom</option>
+                <option value="flat">Flats</option>
+                <option value="pet-friendly"> Pet Friendly</option>
+            </select>
+        </div>
+    </div>
     <div class="heading">
         <h2>All Properties</h2>
     </div>
