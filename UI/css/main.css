@@ -167,6 +167,7 @@ a {
 /* banner */
 
 .heading {
+    clear: both;
     background: #B28451;
     color: #f4f4f4;
     margin: 10px auto;
