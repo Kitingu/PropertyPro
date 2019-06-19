@@ -34,18 +34,36 @@
             <label for="password">Password </label>
             <input type="password" id="password" required>
 
-            </div>
             <button class="btn-primary" type="submit">Log In</button>
 
-            <a href="./signup.html">Don't have an Account? </a>
+            <p>
+                <a href="#" onclick="forgotPassword()">Forgot password?</a>
+                <a href="./signup.html">Don't have an Account? </a>
+            </p>
 
+        </fieldset>
+    </form>
 
+    <div class="modal advert forgot-password">
+        <span class="close-forgot">&times;</span>
+        <h3>Reset Password</h3>
+        <form>
+            <p>
+                <input type="email" placeholder="Enter your email address" id="reset-email">
+            </p> <br>
+            <p>
+                <button class="btn-primary" type="submit">Reset</button>
+                <button class="btn-primary btn-secondary" type="submit">Cancel</button>
+            </p>
 
+        </form>
+    </div>
 
-            <footer class="fixed">
-                <p>Design by<a href="github.com/kitingu">Kitingu</a>Copyright &copy; <span id="year"></span></p>
-            </footer>
-            <script src="./scripts/main.js"></script>
+    <footer class="fixed">
+        <p>Design by<a href="github.com/kitingu">Kitingu</a>Copyright &copy; <span id="year"></span></p>
+    </footer>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/forgot-modal.js"></script>
 </body>
 
 </html>
