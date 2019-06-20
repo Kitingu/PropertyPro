@@ -12,11 +12,11 @@ const deleteUpdate = () => deleteModal.style.display = 'block'
 
 
 
-span.addEventListener('click', () => {
-    modal.style.display = 'none'
-})
+// span.addEventListener('click', () => {
+//     modal.style.display = 'none'
+// })
 
-deleteSpan.addEventListener('click', () => {
-    deleteModal.style.display = 'none'
-})
+// deleteSpan.addEventListener('click', () => {
+//     deleteModal.style.display = 'none'
+// })
 
