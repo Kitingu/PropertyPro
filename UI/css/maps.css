@@ -1,0 +1,26 @@
+.location {
+    height: 420px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.location h2 {
+    font-weight: bold;
+    color: sienna;
+    text-transform: uppercase;
+}
+
+#map {
+    justify-content: center;
+    height: 350px;
+    width: 90%;
+    margin: 5%;
+    position: absolute;
+    left: 0;
+    align-self: flex-start;
+    margin-bottom: 10%;
+    margin-top: 25px;
+}

@@ -72,7 +72,7 @@ html {
     flex: 1;
     flex-basis: auto;
     margin: 10px;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
 }
 
 @media(max-width:1000px) {
