@@ -1,3 +1,11 @@
+/*
+#3F4251  -->light blueish
+#C47B63  -->reddish
+#C69963  -->brownish
+#B3A296  --> whitish
+#101D2C  --> deep blue
+*/
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -15,16 +23,28 @@ html {
 }
 
 a {
+    color: #fff;
+}
+
+a .logo {
     color: #B28451;
+    margin-top: 10px
+}
+
+a.logo span {
+    color: #3F4251;
 }
 
 /* header */
 
 .header {
-    background-color: #fff;
+    background-color: #C69963;
     box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
     width: 100%;
     font-size: 100%;
+    position: absolute;
+    top: 0;
+    margin-bottom:20%;
 }
 
 .header ul {
@@ -32,7 +52,7 @@ a {
     padding: 0;
     list-style: none;
     overflow: hidden;
-    background-color: #fff;
+    background-color: #C69963;
 }
 
 .header li a {
@@ -45,14 +65,16 @@ a {
 
 .header li a:hover, .header .menu-btn:hover {
     background-color: #f4f4f4;
+    color:#C69963;
 }
 
 .header .logo {
     display: block;
     float: left;
     font-size: 2em;
-    padding: 10px 20px;
+    padding: 16px 20px;
     text-decoration: none;
+    background: #C69963;
 }
 
 /* menu */
@@ -146,6 +168,7 @@ a {
 }
 
 .container {
+    clear: both;
     display: grid;
     grid-template-rows: repeat(3, min-content);
     grid-template-columns: minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
@@ -168,7 +191,7 @@ a {
 
 .heading {
     clear: both;
-    background: #B28451;
+    background: #101d2c;
     color: #f4f4f4;
     margin: 10px auto;
     text-align: center;
@@ -191,15 +214,16 @@ a {
 }
 
 .main-form {
+    clear: both;
     max-width: 500px;
+    text-align: center;
     padding: 10px 20px;
-    background: #f4f7f8;
-    margin: 80px auto auto auto;
+    background: #fff;
+    margin: 100px auto;
     padding: 20px;
-    background: t;
-    border-radius: 8px;
-    position: relative;
+    position: absolute;
     margin: auto;
+    border-radius: 5px;
 }
 
 fieldset {
@@ -350,6 +374,6 @@ footer p a {
 }
 
 footer p a:hover {
-    color: #20c063;
+    color: #c69963;
     background: #f4f4f4;
 }
