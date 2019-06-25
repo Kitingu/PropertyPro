@@ -15,6 +15,8 @@ class User {
     save() {
         let user = {
             userId: this.id,
+            firstname: this.firstname,
+            lastname: this.lastname,
             username: this.firstname + this.lastname,
             email: this.email,
             password: bcrypt.hashSync(this.password, bcrypt.genSaltSync(8)),

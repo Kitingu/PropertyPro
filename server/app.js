@@ -5,7 +5,7 @@ const authRoutes = require('./routes/authroutes')
 
 const app = express()
 app.use(express.json())
-app.use(authRoutes)
+app.use('/api/v1', authRoutes)
 app.use(express.urlencoded({ extended: false }));
 
 const PORT = config.appConfig.port || 3000
