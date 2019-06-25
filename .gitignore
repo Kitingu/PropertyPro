@@ -1,3 +1,5 @@
 .vscode/
 asdf.html
 fdsa.js
+node_modules/
+.env
