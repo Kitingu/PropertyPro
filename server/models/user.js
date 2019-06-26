@@ -32,4 +32,7 @@ class User {
 
 }
 
-module.exports.User = User
+module.exports = {
+    users,
+    User
+}

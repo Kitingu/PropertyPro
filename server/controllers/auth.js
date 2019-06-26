@@ -3,6 +3,7 @@ const Joi = require('@hapi/joi')
 const schema = require('../helpers/validator')
 const { User } = require('../models/user')
 const { encodeToken } = require('../helpers/jwt')
+const { hashPassword, compareHash } = require('../helpers/utils')
 const jwt = require('jsonwebtoken')
 const userController = {
 
@@ -44,6 +45,42 @@ const userController = {
                 "error": `user with ${email} already exists please login`
             })
         }
+    },
+
+    async login(req, res) {
+        const { email, password } = req.body
+        if (!email || !password) {
+            return res.status(400).send({ message: 'All fields are required' });
+        }
+        const user = User.getUserByEmail(email)
+        if (user) {
+            if (compareHash(password, user.password)) {
+                token = encodeToken(user)
+                res.status(200).json({
+                    "status": "success",
+                    token
+
+                })
+
+            }
+            else {
+                res.status(401).send({
+                    "status": "error",
+                    "error": "Invalid user login credentials",
+                    "description": "unauthorized"
+                })
+            }
+        }
+        else {
+            res.status(400).send({
+                "status": "error",
+                "error": "user does not exist",
+                "description": "bad request"
+            })
+
+        }
+
+
     }
 }
 
