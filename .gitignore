@@ -3,3 +3,5 @@ asdf.html
 fdsa.js
 node_modules/
 .env
+coverage/
+.nyc_output/
