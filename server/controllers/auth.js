@@ -1,10 +1,11 @@
-require('dotenv')
+const dotenv = require('dotenv')
 const Joi = require('@hapi/joi')
 const schema = require('../helpers/validator')
 const { User } = require('../models/user')
 const { encodeToken } = require('../helpers/jwt')
 const { hashPassword, compareHash } = require('../helpers/utils')
 const jwt = require('jsonwebtoken')
+dotenv.config();
 const userController = {
 
     async signUp(req, res) {
@@ -55,7 +56,7 @@ const userController = {
         const user = User.getUserByEmail(email)
         if (user) {
             if (compareHash(password, user.password)) {
-                token = encodeToken(user)
+                const token = encodeToken(user)
                 res.status(200).json({
                     "status": "success",
                     token
