@@ -33,6 +33,23 @@ const propertyController = {
             }
 
         }
+    },
+
+    async getAll(req, res) {
+        const allProperties = Property.getAllProperties()
+        if (allProperties.length < 1) {
+            res.status(200).send({
+                "status": "success",
+                "data": allProperties,
+                "description": "no available properties at the moment"
+            })
+        }
+        else {
+            res.status(200).send({
+                "status": "success",
+                "data": allProperties
+            })
+        }
     }
 }
 module.exports = propertyController

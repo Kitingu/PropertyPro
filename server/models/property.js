@@ -4,13 +4,13 @@ let bcrypt = require('bcryptjs')
 let properties = []
 
 class Property {
-    constructor(status, state, city, type,price, address, contact, image_url, ownerEmail) {
+    constructor(status, state, city, type, price, address, contact, image_url, ownerEmail) {
         this.id = uuidv4()
         this.status = status
         this.state = state
         this.city = city
         this.owner
-        this.type=type
+        this.type = type
         this.price = price
         this.address = address
         this.contact = contact
@@ -28,7 +28,7 @@ class Property {
             price: this.price,
             address: this.address,
             image_url: this.image_url,
-            contact:this.contact,
+            contact: this.contact,
             owner: this.owner
         }
 
@@ -39,6 +39,10 @@ class Property {
         return properties.find(user => property.id === id)
     }
 
+
+    static getAllProperties() {
+        return properties
+    }
 }
 
 module.exports = {
