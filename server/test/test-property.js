@@ -112,4 +112,17 @@ describe('test properties', () => {
                 done()
             })
     })
+
+    it('should test get all properties', (done) => {
+        chai.request(app)
+            .get('/api/v1/property')
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+
+                done()
+            })
+    })
+
+
 })
