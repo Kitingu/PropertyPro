@@ -50,6 +50,24 @@ const propertyController = {
                 "data": allProperties
             })
         }
+    },
+    async getSpecificAdvert(req, res) {
+        const { id } = req.params
+        const property = Property.getPropertybyId(parseInt(id))
+        if (property) {
+            res.status(200).send({
+                "status": "success",
+                "data": property
+            })
+        }
+        else {
+            res.status(404).send({
+                status: "failed",
+                error: "resource not found",
+                description: `A property with id${id} does not exist`
+
+            })
+        }
     }
 }
 module.exports = propertyController

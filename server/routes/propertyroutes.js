@@ -5,6 +5,6 @@ const upload = require('../middlewares/upload')
 const verifyToken = require('../middlewares/jwt').jwtHelper.verifyToken
 router.post('/property', verifyToken, upload, propertyController.createProperty)
 router.get('/property', propertyController.getAll)
-
+router.get('/property/:id', propertyController.getSpecificAdvert)
 module.exports = router
 
