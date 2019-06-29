@@ -1,11 +1,10 @@
 require('dotenv')
-const uuidv4 = require('uuid/v4')
 let bcrypt = require('bcryptjs')
 let properties = []
 
 class Property {
     constructor(status, state, city, type, price, address, contact, image_url, ownerEmail) {
-        this.id = uuidv4()
+        this.propertyId = (properties.length) + 1
         this.status = status
         this.state = state
         this.city = city
@@ -20,7 +19,7 @@ class Property {
     }
     save() {
         let property = {
-            propertyId: this.id,
+            propertyId: this.propertyId,
             status: this.status,
             state: this.state,
             city: this.city,
@@ -36,7 +35,7 @@ class Property {
     }
 
     static getPropertybyId(id) {
-        return properties.find(user => property.id === id)
+        return properties.find(property => property.propertyId === id)
     }
 
 

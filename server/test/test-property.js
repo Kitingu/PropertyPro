@@ -22,8 +22,9 @@ describe('test properties', () => {
 
     })
 
-    after(() => {
+    after((done) => {
         properties.length = 0
+        done()
     })
 
     it('create property advert', (done) => {
@@ -88,6 +89,15 @@ describe('test properties', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(400)
+                // done()
+            })
+
+        chai.request(app)
+            .get('/api/v1/property/1')
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+
                 done()
             })
     })
@@ -123,6 +133,19 @@ describe('test properties', () => {
                 done()
             })
     })
+
+
+    it('should test get a non existing single properties', (done) => {
+        chai.request(app)
+            .get('/api/v1/property/9')
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(404)
+
+                done()
+            })
+    })
+
 
 
 })
