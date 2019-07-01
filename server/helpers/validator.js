@@ -11,7 +11,6 @@ const schema = {
     }),
 
     property: joi.object().keys({
-        status: joi.string().regex(/^[a-zA-Z]+$/).min(3).max(128).required(),
         state: joi.string().regex(/^[a-zA-Z]+$/).min(3).max(128).required(),
         city: joi.string().regex(/^[a-zA-Z]+$/).min(3).max(128).required(),
         price: joi.string().regex(/^[0-9]+$/).min(3).max(128).required(),

@@ -34,7 +34,6 @@ describe('test properties', () => {
             .set('Authorization', `Bearer ${token}`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .attach('image', 'server/test/test.jpg', 'test.jpg')
-            .field('status', 'goodcondition')
             .field('type', 'miniflat')
             .field('state', 'Kenya')
             .field('city', 'Nairobi')
@@ -56,7 +55,6 @@ describe('test properties', () => {
             .post('/api/v1/property')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .attach('image', 'server/test/test.jpg', 'test.jpg')
-            .field('status', 'goodcondition')
             .field('type', 'miniflat')
             .field('state', 'Kenya')
             .field('city', 'Nairobi')
@@ -77,8 +75,6 @@ describe('test properties', () => {
             .post('/api/v1/property')
             .set('Authorization', `Bearer ${token}`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
-
-            .field('status', 'goodcondition')
             .field('type', 'miniflat')
             .field('state', 'Kenya')
             .field('city', 'Nairobi')
@@ -100,10 +96,9 @@ describe('test properties', () => {
             .set('Authorization', `Bearer ${token}`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .attach('image', 'server/test/test.jpg', 'test.jpg')
-            .field('status', '1226946444444444....')
             .field('type', 'miniflat')
             .field('state', 'Kenya')
-            .field('city', 'Nairobi')
+            .field('city', 'h1232......')
             .field('price', '4000000000')
             .field('address', 122649)
             .field('contact', 07153578331)
@@ -205,8 +200,44 @@ describe('test properties', () => {
             })
 
     })
+    it('mark property advert as sold', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v1/property/2/sold')
+            .set('Authorization', `Bearer ${token}`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+                done()
+            })
 
+    })
+    it('mark property as sold non existing advert', (done) => {
 
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v1/property/5/sold')
+            .set('Authorization', `Bearer ${token}`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(404)
+                done()
+            })
+
+    })
+
+    it('mark property as sold that you dont own advert', (done) => {
+        properties.push(utils.sample_property1)
+        chai.request(app)
+            .patch('/api/v1/property/3/sold')
+            .set('Authorization', `Bearer ${token}`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(401)
+                done()
+            })
+
+    })
 
 
 })

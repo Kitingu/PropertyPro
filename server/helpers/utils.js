@@ -11,8 +11,12 @@ const compareHash = (password, hashedPassword) => {
         return false
     }
 }
+const checkOwner = (user, owner) => {
+    return user === owner
+}
 
 module.exports = {
     hashPassword,
-    compareHash
+    compareHash,
+    checkOwner
 }

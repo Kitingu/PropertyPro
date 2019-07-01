@@ -3,9 +3,9 @@ let bcrypt = require('bcryptjs')
 let properties = []
 
 class Property {
-    constructor(status, state, city, type, price, address, contact, image_url, ownerEmail) {
+    constructor(state, city, type, price, address, contact, image_url, ownerEmail) {
         this.propertyId = (properties.length) + 1
-        this.status = status
+        this.status = 'available'
         this.state = state
         this.city = city
         this.owner
@@ -46,6 +46,9 @@ class Property {
         const property = this.getPropertybyId(id)
         const index = properties.indexOf(property)
         properties.splice(index, 1)
+    }
+    static changePropertyStatus(property){
+        property.status = "sold"
     }
 }
 
