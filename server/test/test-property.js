@@ -22,7 +22,7 @@ describe('test properties', () => {
 
     })
 
-    after((done) => {
+    afterEach((done) => {
         properties.length = 0
         done()
     })
@@ -89,17 +89,9 @@ describe('test properties', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(400)
-                // done()
-            })
-
-        chai.request(app)
-            .get('/api/v1/property/1')
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res).to.have.status(200)
-
                 done()
             })
+
     })
     it('create property with invalid user input', (done) => {
 
@@ -124,6 +116,18 @@ describe('test properties', () => {
     })
 
     it('should test get all properties', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .get('/api/v1/property')
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+
+                done()
+            })
+    })
+
+    it('should test get all properties when non exists', (done) => {
         chai.request(app)
             .get('/api/v1/property')
             .end((err, res) => {
@@ -145,6 +149,63 @@ describe('test properties', () => {
                 done()
             })
     })
+
+
+    it('delete property advert', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .delete('/api/v1/property/2')
+            .set('Authorization', `Bearer ${token}`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+                done()
+            })
+
+    })
+
+    it('gets a single property advert', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .get('/api/v1/property/2')
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+                done()
+            })
+
+    })
+
+
+
+
+    it('delete property non existing advert', (done) => {
+
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .delete('/api/v1/property/5')
+            .set('Authorization', `Bearer ${token}`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(404)
+                done()
+            })
+
+    })
+
+    it('delete property that you dont own advert', (done) => {
+        properties.push(utils.sample_property1)
+        chai.request(app)
+            .delete('/api/v1/property/3')
+            .set('Authorization', `Bearer ${token}`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(401)
+                done()
+            })
+
+    })
+
 
 
 

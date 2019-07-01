@@ -68,6 +68,38 @@ const propertyController = {
 
             })
         }
+    },
+    async deleteProperty(req, res) {
+        const { id } = req.params
+        const property = Property.getPropertybyId(parseInt(id))
+        if (property) {
+            const owner = req.user.email
+            if (owner === property.owner) {
+                Property.deleteProperty(id)
+                res.status(200).send({
+                    "status": "success",
+                    "data": { "message": "advert delete successfully" }
+                })
+            }
+            else {
+                res.status(401).send({
+                    status: "failed",
+                    error: "you dont have the privilege to perform this task",
+                    description: "not allowed"
+
+                })
+            }
+
+
+        }
+        else {
+            res.status(404).send({
+                status: "failed",
+                error: "resource not found",
+                description: `A property with id${id} does not exist`
+
+            })
+        }
     }
 }
 module.exports = propertyController

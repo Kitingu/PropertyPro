@@ -18,6 +18,30 @@ const utils = {
     invalid_login: {
         email: "asdmail.com",
         password: "asdQ@123"
+    },
+    sample_property: {
+        "propertyId": 2,
+        "status": "goog",
+        "state": "kenya",
+        "city": "nairobi",
+        "type": "two",
+        "price": "40000",
+        "address": "3943",
+        "image_url": "http://res.cloudinary.com/benlegendj/image/upload/v1561843898/property/iuaqakp4nrm8tzccsddo.png",
+        "contact": "4949494921",
+        "owner": "asdf@gmail.com"
+    },
+    sample_property1: {
+        "propertyId": 3,
+        "status": "goog",
+        "state": "kenya",
+        "city": "nairobi",
+        "type": "two",
+        "price": "40000",
+        "address": "3943",
+        "image_url": "http://res.cloudinary.com/benlegendj/image/upload/v1561843898/property/iuaqakp4nrm8tzccsddo.png",
+        "contact": "4949494921",
+        "owner": "benlegendj@gmail.com"
     }
 }
 
