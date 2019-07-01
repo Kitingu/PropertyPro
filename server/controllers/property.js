@@ -2,13 +2,13 @@ require('dotenv')
 const Joi = require('@hapi/joi')
 const schema = require('../helpers/validator')
 const { Property, properties } = require('../models/property')
-
+const { checkOwner } = require('../helpers/utils')
 
 const propertyController = {
     async createProperty(req, res) {
 
         const ownerEmail = req.user.email
-        const { status, state, city, type, price, address, contact } = req.body
+        const { state, city, type, price, address, contact } = req.body
 
         let result = Joi.validate(req.body, schema.property)
 
@@ -21,7 +21,7 @@ const propertyController = {
         else {
             try {
                 let imgPath = await req.file.url
-                const property = new Property(status, state, city, type, price, address, contact, imgPath, ownerEmail)
+                const property = new Property(state, city, type, price, address, contact, imgPath, ownerEmail)
                 property.save()
                 res.status(201).send(property)
 
@@ -100,6 +100,37 @@ const propertyController = {
 
             })
         }
+    },
+    async changeStatus(req, res) {
+        const { id } = req.params
+        const property = Property.getPropertybyId(parseInt(id))
+        if (property) {
+            const user = req.user.email
+            const owner = property.owner
+
+            if (checkOwner(user, owner)) {
+                Property.changePropertyStatus(property)
+                res.status(200).send({
+                    data: property
+                })
+            }
+            else
+                res.status(401).send({
+                    status: "failed",
+                    error: "you dont have the privilege to perform this task",
+                    description: "not allowed"
+
+                })
+        }
+        else {
+            res.status(404).send({
+                status: "failed",
+                error: "resource not found",
+                description: `A property with id ${id} does not exist`
+
+            })
+        }
     }
+
 }
 module.exports = propertyController
