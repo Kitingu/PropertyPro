@@ -42,6 +42,11 @@ class Property {
     static getAllProperties() {
         return properties
     }
+    static deleteProperty(id) {
+        const property = this.getPropertybyId(id)
+        const index = properties.indexOf(property)
+        properties.splice(index, 1)
+    }
 }
 
 module.exports = {
