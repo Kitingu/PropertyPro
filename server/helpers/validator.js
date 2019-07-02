@@ -18,7 +18,15 @@ const schema = {
         address: joi.string().regex(/^[0-9]+$/).min(3).max(128).required(),
         contact: joi.string().regex(/^[0-9]+$/).min(10).max(13)
             .required()
+    }),
+    priceUpdate: joi.object().keys({
+        price: joi.number().required()
     })
 }
 
-module.exports = schema
+const options = {
+    language: {
+        key: '{{key}} '
+    }
+}
+module.exports = { schema, options }

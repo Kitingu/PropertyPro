@@ -1,9 +1,9 @@
 require('dotenv')
 const Joi = require('@hapi/joi')
-const schema = require('../helpers/validator')
+const { schema, options } = require('../helpers/validator')
 const { Property, properties } = require('../models/property')
-const { checkOwner } = require('../helpers/utils')
-
+const { checkOwner, Response } = require('../helpers/utils')
+const userResponse = new Response()
 const propertyController = {
     async createProperty(req, res) {
 
@@ -105,10 +105,7 @@ const propertyController = {
         const { id } = req.params
         const property = Property.getPropertybyId(parseInt(id))
         if (property) {
-            const user = req.user.email
-            const owner = property.owner
-
-            if (checkOwner(user, owner)) {
+            if (checkOwner(req, property)) {
                 Property.changePropertyStatus(property)
                 res.status(200).send({
                     data: property
@@ -130,7 +127,34 @@ const propertyController = {
 
             })
         }
-    }
+    },
+    async updatePrice(req, res) {
+        const { id } = req.params
+        const property = Property.getPropertybyId(parseInt(id))
 
+        let result = Joi.validate(req.body, schema.priceUpdate, options)
+        if (result.error) {
+            userResponse.setError('400', 'failed', result.error.details[0].message)
+            return userResponse.send(res)
+        }
+        const price = req.body.price
+        if (property) {
+            if (checkOwner(req, property)) {
+                Property.updatePrice(property, price)
+                userResponse.setSuccess('200', 'success', "Property updated successfully", property)
+                return userResponse.send(res)
+            }
+            else {
+                userResponse.setError('401', 'failed', "you dont have the privilege to perform this task")
+                return userResponse.send(res)
+            }
+
+        }
+        else {
+            userResponse.setError('404', 'failed', `A property with id ${id} does not exist`)
+            return userResponse.send(res)
+
+        }
+    }
 }
 module.exports = propertyController

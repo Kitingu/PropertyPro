@@ -240,4 +240,58 @@ describe('test properties', () => {
     })
 
 
+    it('update price', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v1/property/2/price')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.newPrice)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+                done()
+            })
+
+    })
+    it('update price with invalid input', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v1/property/2/price')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.invalidPrice)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(400)
+                done()
+            })
+
+    })
+
+    it('update price for a property you dont own', (done) => {
+        properties.push(utils.sample_property1)
+        chai.request(app)
+            .patch('/api/v1/property/3/price')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.newPrice)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(401)
+                done()
+            })
+
+    })
+
+    it('update price for non existing property', (done) => {
+        properties.push(utils.sample_property1)
+        chai.request(app)
+            .patch('/api/v1/property/9/price')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.newPrice)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(404)
+                done()
+            })
+
+    })
 })

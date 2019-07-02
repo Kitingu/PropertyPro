@@ -42,6 +42,12 @@ const utils = {
         "image_url": "http://res.cloudinary.com/benlegendj/image/upload/v1561843898/property/iuaqakp4nrm8tzccsddo.png",
         "contact": "4949494921",
         "owner": "benlegendj@gmail.com"
+    },
+    newPrice:{
+        "price":120484848
+    },
+    invalidPrice:{
+        "price":"sdfghjk"
     }
 }
 
