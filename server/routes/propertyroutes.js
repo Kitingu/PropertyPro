@@ -6,7 +6,8 @@ const verifyToken = require('../middlewares/jwt').jwtHelper.verifyToken
 router.post('/property', verifyToken, upload, propertyController.createProperty)
 router.get('/property', propertyController.getAll)
 router.get('/property/:id', propertyController.getSpecificAdvert)
-router.patch('/property/:id/sold',verifyToken, propertyController.changeStatus)
+router.patch('/property/:id/price', verifyToken, propertyController.updatePrice)
+router.patch('/property/:id/sold', verifyToken, propertyController.changeStatus)
 router.delete('/property/:id', verifyToken, propertyController.deleteProperty)
 module.exports = router
 

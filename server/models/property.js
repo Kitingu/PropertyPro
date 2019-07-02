@@ -47,8 +47,11 @@ class Property {
         const index = properties.indexOf(property)
         properties.splice(index, 1)
     }
-    static changePropertyStatus(property){
+    static changePropertyStatus(property) {
         property.status = "sold"
+    }
+    static updatePrice(property, price) {
+        property.price = price
     }
 }
 

@@ -1,6 +1,6 @@
 const dotenv = require('dotenv')
 const Joi = require('@hapi/joi')
-const schema = require('../helpers/validator')
+const {schema} = require('../helpers/validator')
 const { User } = require('../models/user')
 const { encodeToken } = require('../helpers/jwt')
 const { hashPassword, compareHash } = require('../helpers/utils')
