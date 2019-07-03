@@ -37,6 +37,16 @@ const propertyController = {
 
     async getAll(req, res) {
         const allProperties = Property.getAllProperties()
+        const { type } = req.query
+        if (type) {
+            const results = Property.queryByType(type)
+            if (results) {
+                userResponse.setSuccess(200, "success", 'properties fetched successfully', results)
+                return userResponse.send(res)
+            }
+            userResponse.setError(404, "failed", "couldnt find anything that matches the filters")
+            return userResponse.send(res)
+        }
         if (allProperties.length < 1) {
             res.status(200).send({
                 "status": "success",
