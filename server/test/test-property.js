@@ -171,7 +171,29 @@ describe('test properties', () => {
 
     })
 
+    it('gets a single property by type', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .get('/api/v1/property?type=two')
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+                done()
+            })
 
+    })
+
+    it('gets a single property by type ', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .get('/api/v1/property?type=car')
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(404)
+                done()
+            })
+
+    })
 
 
     it('delete property non existing advert', (done) => {

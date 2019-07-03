@@ -53,6 +53,9 @@ class Property {
     static updatePrice(property, price) {
         property.price = price
     }
+    static queryByType(type) {
+        return properties.find(property => property.type === type)
+    }
 }
 
 module.exports = {
