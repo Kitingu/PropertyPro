@@ -165,6 +165,32 @@ const propertyController = {
             return userResponse.send(res)
 
         }
+    },
+    async flagProperty(req, res) {
+        const { id } = req.params
+        const property = Property.getPropertybyId(parseInt(id))
+        const { reason, description } = req.body
+        let result = Joi.validate(req.body, schema.flags, options)
+        if (result.error) {
+            userResponse.setError('400', 'failed', result.error.details[0].message)
+            return userResponse.send(res)
+        }
+        if (property) {
+            if (checkOwner(req, property)) {
+                userResponse.setError('403', 'failed', 'you can not flag your own property')
+                return userResponse.send(res)
+            }
+            else {
+                const owner = req.user.userId
+                Property.flagProperty(owner, property, reason, description)
+                userResponse.setSuccess('200', 'success', "Property flagged successfully", property)
+                return userResponse.send(res)
+
+            }
+        }
+        userResponse.setError('404', 'failed', "property does not exist")
+        return userResponse.send(res)
+
     }
 }
 module.exports = propertyController

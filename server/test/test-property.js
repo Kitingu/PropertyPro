@@ -316,4 +316,62 @@ describe('test properties', () => {
             })
 
     })
+
+    it('flag a property', (done) => {
+        properties.push(utils.sample_property1)
+        console.log(properties)
+        chai.request(app)
+            .patch('/api/v1/property/3/flag')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.flag)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+                done()
+            })
+
+    })
+
+    it('flag a property with invalid details', (done) => {
+        properties.push(utils.sample_property1)
+        chai.request(app)
+            .patch('/api/v1/property/3/flag')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.invalidFlag)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(400)
+                done()
+            })
+
+    })
+
+
+    it('flag a non existing property', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v1/property/9/flag')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.flag)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(404)
+                done()
+            })
+
+    })
+
+    it('flag a property you own', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v1/property/2/flag')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.flag)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(403)
+                done()
+            })
+
+    })
 })

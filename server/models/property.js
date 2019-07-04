@@ -1,4 +1,5 @@
 require('dotenv')
+const moment = require('moment')
 let bcrypt = require('bcryptjs')
 let properties = []
 
@@ -15,6 +16,7 @@ class Property {
         this.contact = contact
         this.image_url = image_url
         this.owner = ownerEmail
+        this.flags = []
 
     }
     save() {
@@ -28,7 +30,8 @@ class Property {
             address: this.address,
             image_url: this.image_url,
             contact: this.contact,
-            owner: this.owner
+            owner: this.owner,
+            flags: this.flags
         }
 
         properties.push(property)
@@ -55,6 +58,17 @@ class Property {
     }
     static queryByType(type) {
         return properties.find(property => property.type === type)
+    }
+    static flagProperty(userId, property, reason, description) {
+        const flag = {
+            userId,
+            propertyId: property.propertyId,
+            timeCreated: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            reason,
+            description
+        }
+        property.flags.push(flag)
+
     }
 }
 
