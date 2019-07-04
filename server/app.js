@@ -1,14 +1,27 @@
 require('dotenv')
 const express = require('express')
 const config = require('../config')
+const {handle404,handle500}=require('./middlewares/error-handler')
 const propertyRoutes = require('./routes/propertyroutes')
 const authRoutes = require('./routes/authroutes')
-
+const morgan = require('morgan')
 const app = express()
+
+app.use(morgan('dev'));
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+
+//routes
 app.use('/api/v1', authRoutes)
 app.use('/api/v1', propertyRoutes)
-app.use(express.urlencoded({ extended: false }));
+
+//handle 404 error
+app.use(handle404)
+
+//handle 500
+app.use(handle500)
+
+
 
 const PORT = config.appConfig.port || 3000
 

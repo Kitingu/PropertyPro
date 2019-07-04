@@ -15,7 +15,7 @@ const test = {
 
 const production = {
     appConfig: {
-        port: 3000
+        port: process.env.PORT
     }
 };
 
