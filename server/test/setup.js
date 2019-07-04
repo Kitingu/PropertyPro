@@ -29,7 +29,8 @@ const utils = {
         "address": "3943",
         "image_url": "http://res.cloudinary.com/benlegendj/image/upload/v1561843898/property/iuaqakp4nrm8tzccsddo.png",
         "contact": "4949494921",
-        "owner": "asdf@gmail.com"
+        "owner": "asdf@gmail.com",
+        "flags": []
     },
     sample_property1: {
         "propertyId": 3,
@@ -41,13 +42,22 @@ const utils = {
         "address": "3943",
         "image_url": "http://res.cloudinary.com/benlegendj/image/upload/v1561843898/property/iuaqakp4nrm8tzccsddo.png",
         "contact": "4949494921",
-        "owner": "benlegendj@gmail.com"
+        "owner": "benlegendj@gmail.com",
+        "flags": []
     },
-    newPrice:{
-        "price":120484848
+    newPrice: {
+        "price": 120484848
     },
-    invalidPrice:{
-        "price":"sdfghjk"
+    invalidPrice: {
+        "price": "sdfghjk"
+    },
+    flag: {
+        "reason": "price",
+        "description": "the price is very high"
+    },
+    invalidFlag: {
+        "reason": "",
+        "description": "the price is very high"
     }
 }
 

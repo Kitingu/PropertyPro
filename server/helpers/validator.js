@@ -21,6 +21,10 @@ const schema = {
     }),
     priceUpdate: joi.object().keys({
         price: joi.number().required()
+    }),
+    flags: joi.object().keys({
+        reason: joi.string().alphanum().required(),
+        description: joi.string().regex(/^[,. a-z0-9]+$/, 'numbers letters fullstops and comma\'s').required()
     })
 }
 
