@@ -2,8 +2,7 @@ const utils = require('./setup')
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const { app } = require('../app')
-const { Property, properties } = require('../models/property')
-const fs = require('fs')
+const { properties } = require('../models/property')
 chai.use(chaiHttp)
 const { expect } = chai;
 
@@ -319,7 +318,6 @@ describe('test properties', () => {
 
     it('flag a property', (done) => {
         properties.push(utils.sample_property1)
-        console.log(properties)
         chai.request(app)
             .patch('/api/v1/property/3/flag')
             .set('Authorization', `Bearer ${token}`)

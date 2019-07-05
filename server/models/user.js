@@ -1,16 +1,16 @@
 require('dotenv')
 const uuidv4 = require('uuid/v4')
-let bcrypt = require('bcryptjs')
 let users = []
 
 class User {
-    constructor(firstname, lastname, email, password) {
+    constructor(firstname, lastname, email, password, isAgent) {
         this.id = uuidv4()
         this.firstname = firstname
         this.lastname = lastname
         this.email = email
         this.password = password
-        this.admin = false
+        this.isAgent = isAgent
+        this.isAdmin = false
     }
     save() {
         let user = {
@@ -19,8 +19,9 @@ class User {
             lastname: this.lastname,
             username: this.firstname + this.lastname,
             email: this.email,
-            password: bcrypt.hashSync(this.password, bcrypt.genSaltSync(8)),
-            admin: this.admin
+            password: this.password,
+            isAgent:this.isAgent,
+            isAdmin: this.isAdmin
         }
 
         users.push(user)

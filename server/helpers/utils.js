@@ -40,7 +40,7 @@ class Response {
         const result = {
             status: this.status,
             message: this.message,
-            data: this.data,
+            data: this.data
         };
 
         if (this.type === 'success') {
@@ -48,7 +48,7 @@ class Response {
         }
         return res.status(this.statusCode).json({
             status: this.status,
-            message: this.message,
+            message: this.message
         });
     }
 }

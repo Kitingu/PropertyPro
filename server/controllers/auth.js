@@ -1,21 +1,23 @@
 const dotenv = require('dotenv')
 const Joi = require('@hapi/joi')
-const {schema} = require('../helpers/validator')
+const { schema, options } = require('../helpers/validator')
 const { User } = require('../models/user')
 const { encodeToken } = require('../helpers/jwt')
 const { hashPassword, compareHash } = require('../helpers/utils')
+const { Response } = require('../helpers/utils')
 const jwt = require('jsonwebtoken')
+const userResponse = new Response()
 dotenv.config();
 const userController = {
 
     async signUp(req, res) {
 
-        let { firstname, lastname, email, password } = req.body
-
+        let { firstname, lastname, email, password, isAgent } = req.body
         let user = User.getUserByEmail(email)
         if (!user) {
-            Joi.validate(req.body, schema.user).then(result => {
-                let user1 = new User(firstname, lastname, email, password)
+            Joi.validate(req.body, schema.user, options).then(result => {
+                const hashedPassword = hashPassword(password)
+                let user1 = new User(firstname, lastname, email, hashedPassword, isAgent)
 
                 user1.save()
                 const token = encodeToken(user1)
@@ -25,18 +27,16 @@ const userController = {
                     firstname: user1.firstname,
                     lastname: user1.lastname,
                     email: user1.email,
+                    isAgent: user1.isAgent,
                     token
 
                 }
-                res.status(201).json({
-                    "status": "success",
-                    "message": "User registered successfully",
-                    data
-                })
+                userResponse.setSuccess(201, 'success', 'User registered successfully', data)
+                return userResponse.send(res)
             }).catch(error => {
                 res.status(400).send({
                     "status": "error",
-                    "error": error.message
+                    "error": error.details[0].message
                 })
             })
         }
