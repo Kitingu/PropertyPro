@@ -1,5 +1,7 @@
 const { User } = require('../models/user')
 const jwt = require('jsonwebtoken')
+const { Response } = require('../helpers/utils')
+const userResponse = new (Response)
 require('dotenv')
 
 const jwtHelper = {
@@ -15,14 +17,16 @@ const jwtHelper = {
             const user = User.getUserByEmail(decoded.user.email)
             req.user = user
             if (!user) {
-                return res.status(400).send({ message: 'Invalid Token' });
+                userResponse.setError(400, 'failed', 'invalid token please sign up')
+                return userResponse.send(res)
             }
             next()
 
 
         }
         catch (error) {
-            return res.status(400).send({ message: 'Invalid Token' });
+            userResponse.setError(400, 'failed', 'please provide a valid token')
+            return userResponse.send(res)
         }
 
 

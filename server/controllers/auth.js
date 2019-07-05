@@ -5,7 +5,6 @@ const { User } = require('../models/user')
 const { encodeToken } = require('../helpers/jwt')
 const { hashPassword, compareHash } = require('../helpers/utils')
 const { Response } = require('../helpers/utils')
-const jwt = require('jsonwebtoken')
 const userResponse = new Response()
 dotenv.config();
 const userController = {
@@ -34,51 +33,39 @@ const userController = {
                 userResponse.setSuccess(201, 'success', 'User registered successfully', data)
                 return userResponse.send(res)
             }).catch(error => {
-                res.status(400).send({
-                    "status": "error",
-                    "error": error.details[0].message
-                })
+                userResponse.setError(400, 'failed', error.message)
+                return userResponse.send(res)
+
             })
         }
         else {
-            res.status(409).send({
-                "status_code": "error",
-                "error": `user with ${email} already exists please login`
-            })
+            userResponse.setError(409, 'failed', `user with ${email} already exists please login`)
+            return userResponse.send(res)
         }
     },
 
     async login(req, res) {
         const { email, password } = req.body
         if (!email || !password) {
-            return res.status(400).send({ message: 'All fields are required' });
+            userResponse.setError(400, 'failed', 'All fields are required')
+            return userResponse.send(res)
         }
         const user = User.getUserByEmail(email)
         if (user) {
             if (compareHash(password, user.password)) {
                 const token = encodeToken(user)
-                res.status(200).json({
-                    "status": "success",
-                    token
-
-                })
+                userResponse.setSuccess(200, 'success', 'logged in successfully', token)
+                return userResponse.send(res)
 
             }
             else {
-                res.status(401).send({
-                    "status": "error",
-                    "error": "Invalid user login credentials",
-                    "description": "unauthorized"
-                })
+                userResponse.setError(401, 'failed', 'Invalid user login credentials')
+                return userResponse.send(res)
             }
         }
         else {
-            res.status(400).send({
-                "status": "error",
-                "error": "user does not exist",
-                "description": "bad request"
-            })
-
+            userResponse.setError(400, 'failed', 'user does not exist')
+            return userResponse.send(res)
         }
 
 

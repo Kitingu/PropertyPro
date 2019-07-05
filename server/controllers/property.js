@@ -1,7 +1,7 @@
 require('dotenv')
 const Joi = require('@hapi/joi')
 const { schema, options } = require('../helpers/validator')
-const { Property, properties } = require('../models/property')
+const { Property } = require('../models/property')
 const { checkOwner, Response } = require('../helpers/utils')
 const userResponse = new Response()
 const propertyController = {
@@ -13,9 +13,8 @@ const propertyController = {
         let result = Joi.validate(req.body, schema.property)
 
         if (result.error) {
-            res.status(400).send({
-                error: result.error.details[0].message
-            })
+            userResponse.setError(400, 'failed', result.error.message)
+            return userResponse.send(res)
 
         }
         else {
@@ -23,13 +22,12 @@ const propertyController = {
                 let imgPath = await req.file.url
                 const property = new Property(state, city, type, price, address, contact, imgPath, ownerEmail)
                 property.save()
-                res.status(201).send(property)
+                userResponse.setSuccess(201, 'success', 'property advert created successfully', property)
+                return userResponse.send(res)
 
             } catch (error) {
-                res.status(400).send({
-                    "status": "failed",
-                    "error": "please provide an image of type png, gif or jpg"
-                })
+                userResponse.setError(400, 'failed', 'please provide an image of type png, gif or jpg')
+                return userResponse.send(res)
             }
 
         }
@@ -48,35 +46,25 @@ const propertyController = {
             return userResponse.send(res)
         }
         if (allProperties.length < 1) {
-            res.status(200).send({
-                "status": "success",
-                "data": allProperties,
-                "description": "no available properties at the moment"
-            })
+            userResponse.setSuccess(200, 'success', 'no available properties at the moment', allProperties)
+            return userResponse.send(res)
         }
         else {
-            res.status(200).send({
-                "status": "success",
-                "data": allProperties
-            })
+            userResponse.setSuccess(200, 'success', 'properties fetched successfully', allProperties)
+            return userResponse.send(res)
         }
     },
     async getSpecificAdvert(req, res) {
         const { id } = req.params
         const property = Property.getPropertybyId(parseInt(id))
         if (property) {
-            res.status(200).send({
-                "status": "success",
-                "data": property
-            })
+            userResponse.setSuccess(200, 'success', 'property advert fetched successfully', property)
+            return userResponse.send(res)
         }
         else {
-            res.status(404).send({
-                status: "failed",
-                error: "resource not found",
-                description: `A property with id${id} does not exist`
+            userResponse.setError(404, 'failed', `A property with id ${id} does not exist`)
+            return userResponse.send(res)
 
-            })
         }
     },
     async deleteProperty(req, res) {
@@ -86,29 +74,21 @@ const propertyController = {
             const owner = req.user.email
             if (owner === property.owner) {
                 Property.deleteProperty(id)
-                res.status(200).send({
-                    "status": "success",
-                    "data": { "message": "advert delete successfully" }
-                })
+                userResponse.setSuccess(204, 'success', 'advert deleted successfully', null)
+                userResponse.send(res)
             }
             else {
-                res.status(401).send({
-                    status: "failed",
-                    error: "you dont have the privilege to perform this task",
-                    description: "not allowed"
+                userResponse.setError(401, 'failed', 'you dont have the privilege to perform this task')
+                return userResponse.send(res)
 
-                })
             }
 
 
         }
         else {
-            res.status(404).send({
-                status: "failed",
-                error: "resource not found",
-                description: `A property with id${id} does not exist`
+            userResponse.setError(404, 'failed', `A property with id${id} does not exist`)
+            return userResponse.send(res)
 
-            })
         }
     },
     async changeStatus(req, res) {
@@ -117,17 +97,13 @@ const propertyController = {
         if (property) {
             if (checkOwner(req, property)) {
                 Property.changePropertyStatus(property)
-                res.status(200).send({
-                    data: property
-                })
+                userResponse.setSuccess(200, 'success', 'property advert updated successfully', property)
+                return userResponse.send(res)
             }
-            else
-                res.status(401).send({
-                    status: "failed",
-                    error: "you dont have the privilege to perform this task",
-                    description: "not allowed"
-
-                })
+            else {
+                userResponse.setError(401, 'failed', 'you dont have the privilege to perform this task')
+                return userResponse.send(res)
+            }
         }
         else {
             res.status(404).send({
@@ -137,14 +113,15 @@ const propertyController = {
 
             })
         }
-    },
+    }
+    ,
     async updatePrice(req, res) {
         const { id } = req.params
         const property = Property.getPropertybyId(parseInt(id))
 
         let result = Joi.validate(req.body, schema.priceUpdate, options)
         if (result.error) {
-            userResponse.setError('400', 'failed', result.error.details[0].message)
+            userResponse.setError('400', 'failed', result.error.message)
             return userResponse.send(res)
         }
         const price = req.body.price
@@ -172,7 +149,7 @@ const propertyController = {
         const { reason, description } = req.body
         let result = Joi.validate(req.body, schema.flags, options)
         if (result.error) {
-            userResponse.setError('400', 'failed', result.error.details[0].message)
+            userResponse.setError('400', 'failed', result.error.message)
             return userResponse.send(res)
         }
         if (property) {
