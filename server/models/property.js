@@ -1,6 +1,5 @@
 require('dotenv')
 const moment = require('moment')
-let bcrypt = require('bcryptjs')
 let properties = []
 
 class Property {

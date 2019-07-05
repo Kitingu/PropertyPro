@@ -16,7 +16,6 @@ describe('test server', () => {
             .post('/api/v1/auth/signup')
             .send(utils.user1)
             .end((err, res) => {
-                const message = res.body.message
             })
     })
 
