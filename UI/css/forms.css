@@ -157,9 +157,9 @@
     cursor: pointer;
 }
 
-.delete-modal, .forgot-password {
+.delete-modal {
     clear: both;
-    max-width: 500px;
+    font-size: 18px;
     display: none;
 }
 
@@ -174,10 +174,6 @@
         flex-direction: column;
         margin: auto;
     }
-}
-
-.forgot-password {
-    padding: 20px;
 }
 
 .search-form {
@@ -205,4 +201,14 @@
 
 .wrapper {
     margin: 100px;
+}
+
+.forgot-password form, .delete-modal form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+}
+
+#reset, #deleted {
+    display: none;
 }
