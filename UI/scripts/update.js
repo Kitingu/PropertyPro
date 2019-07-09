@@ -10,13 +10,16 @@ const update = () => {
 }
 const deleteUpdate = () => deleteModal.style.display = 'block'
 
+const deleted = document.querySelector('.deleted').addEventListener('click', () => {
+    document.querySelector('#deleted').style.display = "block"
 
+})
 
-// span.addEventListener('click', () => {
-//     modal.style.display = 'none'
-// })
+span.addEventListener('click', () => {
+    modal.style.display = 'none'
+})
 
-// deleteSpan.addEventListener('click', () => {
-//     deleteModal.style.display = 'none'
-// })
+deleteSpan.addEventListener('click', () => {
+    deleteModal.style.display = 'none'
+})
 

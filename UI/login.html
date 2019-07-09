@@ -16,7 +16,7 @@
 <body>
 
     <header class="header">
-        <a href="index.html" class="logo">PROPERTY PRO</a>
+        <a href="../index.html" class="logo">PROPERTY PRO</a>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
         <ul class="menu">
@@ -37,7 +37,7 @@
                 <button class="btn-primary" on type="submit">Log In</button>
 
                 <p>
-                    <a href="#" onclick="forgotPassword()">Forgot password?</a>
+                    <a href="#" class="#forgetPassword" onclick="forgotPassword()">Forgot password?</a>
                     <a href="./signup.html">Don't have an Account? </a>
                 </p>
 
@@ -48,11 +48,15 @@
 
     <div class="modal advert forgot-password">
         <span class="close-forgot">&times;</span>
-        <h3>Reset Password</h3>
-        <form>
+
+        <form onsubmit="showReset()">
+            <h3>Want to Reset your Password?</h3>
             <p>
                 <input type="email" placeholder="Enter your email address" id="reset-email">
-            </p> <br>
+            </p>
+            <p id="reset"> A password reset token was sent to your email</p>
+            <br>
+
             <p>
                 <button class="btn-primary" type="submit">Reset</button>
                 <button class="btn-primary btn-secondary" type="submit">Cancel</button>
