@@ -53,7 +53,7 @@
                 <th>Address</th>
                 <th>Type</th>
                 <th>Sold</th>
-                <th colspan="2">Action</th>
+                <th>Action</th>
 
             </tr>
         </thead>
@@ -67,9 +67,8 @@
                 <td data-label="Address">010-90100</td>
                 <td data-label="Type">Two Bedroom</td>
                 <td data-label="Sold?"> <input type="checkbox" value="sold" name="sold"> </td>
-                <td colspan="2"><button onClick="location.href='specific_ad.html'" class="sign">View</button>
-                    <button class="sign" onclick="update()">Edit</button>
-                    <button class="sign" onclick="deleteUpdate()">Delete</button>
+                <td><button onClick="location.href='agent_view.html'" class="sign">View</button>
+
                 </td>
             </tr>
             <tr>
@@ -81,9 +80,8 @@
                 <td data-label="Address">010-90100</td>
                 <td data-label="Type">Two Bedroom</td>
                 <td data-label="Sold?"> <input type="checkbox" value="sold" name="sold"> </td>
-                <td colspan="2"><button onClick="location.href='specific_ad.html'" class="sign">View</button>
-                    <button class="sign" onclick="update()">Edit</button>
-                    <button class="sign" onclick="deleteUpdate()">Delete</button>
+                <td><button onClick="location.href='agent_view.html'" class="sign">View</button>
+
                 </td>
 
             </tr>
@@ -97,9 +95,7 @@
                 <td data-label="Type">Two Bedroom</td>
                 <td data-label="Sold?"> <input type="checkbox" onclick="return false" checked value="sold" name="sold">
                 </td>
-                <td colspan="2"><button onClick="location.href='specific_ad.html'" class="sign">View</button>
-                    <button class="sign" disabled onclick="update()">Edit</button>
-                    <button class="sign" onclick="deleteUpdate()">Delete</button>
+                <td><button onClick="location.href='agent_view.html'" class="sign">View</button>
                 </td>
             </tr>
             <tr>
@@ -111,9 +107,8 @@
                 <td data-label="Address">010-90100</td>
                 <td data-label="Type">Two Bedroom</td>
                 <td data-label="Sold?"> <input type="checkbox" value="sold" name="sold"> </td>
-                <td colspan="2"><button onClick="location.href='specific_ad.html'" class="sign">View</button>
-                    <button class="sign" onclick="update()">Edit</button>
-                    <button class="sign" onclick="deleteUpdate()">Delete</button>
+                <td><button onClick="location.href='agent_view.html'" class="sign">View</button>
+
                 </td>
             </tr>
             <tr>
@@ -126,9 +121,8 @@
                 <td data-label="Type">Two Bedroom</td>
                 <td data-label="Sold?"> <input type="checkbox" checked onclick="return false" value="sold" name="sold">
                 </td>
-                <td colspan="2"><button disabled onClick="location.href='specific_ad.html'" class="sign">View</button>
-                    <button class="sign" onclick="update()">Edit</button>
-                    <button class="sign" onclick="deleteUpdate()">Delete</button>
+                <td><button onClick="location.href='agent_view.html'" class="sign">View</button>
+
                 </td>
             </tr>
         </tbody>
@@ -136,51 +130,6 @@
 
 
     </table>
-
-
-    <div class="modal advert">
-        <span class="close">&times;</span>
-        <h3>Update advert</h3>
-        <form>
-
-            <p>
-                <label for="price"> Price</label>
-                <input type="text" value="$250000" name="price">
-            </p>
-            <p>
-                <label for="phone">Contact</label>
-                <input type="text" value="+254841415118" name="contact">
-            </p>
-
-            <div class="upload-btn-wrapper">
-                <button class="btn-upload">Upload picture</button>
-                <input type="file" name="myfile" />
-            </div>
-            <p>
-                <button class="btn">Submit</button>
-            </p>
-        </form>
-    </div>
-
-
-    <div class="modal advert delete-modal">
-        <span class="close-delete">&times;</span>
-
-        <form>
-            <h3>Delete advert</h3>
-            <p>
-                Are you sure you want to delete this Advert?
-            </p>
-            <br>
-            <p id="deleted"> property deleted successfully</p>
-            <br>
-            <p>
-                <button class="btn-delete deleted">Delete</button>
-                <button class="btn-primary">Cancel</button>
-            </p>
-
-        </form>
-    </div>
 
 
     <footer>
