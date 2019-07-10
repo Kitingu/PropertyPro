@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./css/forms.css">
     <link rel="stylesheet" href="./css/maps.css">
     <link rel="stylesheet" href="./css/profile.css">
-
+    <link rel="stylesheet" href="./css/tables.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -72,12 +72,28 @@
 
     </div>
 
+    <table class="orders">
+        <caption> All Bids</caption>
+        <thead>
+            <tr>
+                <th>Bid id</th>
+                <th>Bid Owner</th>
+                <th>Bid Amount</th>
+                <th>Contact</th>
+                <th>Accept Bid</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Bid id">1</td>
+                <td data-label="Bid Owner">Tiger Woods</td>
+                <td data-label="Bid Amount">Available</td>
+                <td data-label="Contact">$5000</td>
+                <td><button class="sign">Accept</button>
 
-
-
-
-
-
+            </tr>
+        </tbody>
+    </table>
 
 
     <div class="gallery">
@@ -148,7 +164,7 @@
 
     <script src="./scripts/update.js"></script>
     <script src="./scripts/maps.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaf4GOdUVnihPxIR6ps9o7_2mAOaPtEb0&callback=initMap">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdJ2lMzLN7jGl_KHHWv1UvXrhqExiSUM&callback=initMap">
     </script>
 </body>
 
