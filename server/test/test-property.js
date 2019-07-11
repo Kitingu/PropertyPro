@@ -152,7 +152,7 @@ describe('test properties', () => {
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 if (err) done(err);
-                expect(res).to.have.status(200)
+                expect(res).to.have.status(204)
                 done()
             })
 
@@ -359,7 +359,7 @@ describe('test properties', () => {
 
     })
 
-    it('flag a property you own', (done) => {
+    it('flag a property don\'t you own', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .patch('/api/v1/property/2/flag')
@@ -371,5 +371,17 @@ describe('test properties', () => {
                 done()
             })
 
+    })
+
+    it('handle 404 error', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v1/prope')
+            .send(utils.flag)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(404)
+                done()
+            })
     })
 })

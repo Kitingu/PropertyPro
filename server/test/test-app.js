@@ -79,4 +79,15 @@ describe('test server', () => {
                 done()
             })
     })
+
+    it('user login without fields', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({"":""})
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(400)
+                done()
+            })
+    })
 })
