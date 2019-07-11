@@ -152,7 +152,7 @@ describe('test properties', () => {
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 if (err) done(err);
-                expect(res).to.have.status(204)
+                expect(res).to.have.status(200)
                 done()
             })
 
@@ -373,14 +373,26 @@ describe('test properties', () => {
 
     })
 
-    it('handle 404 error', (done) => {
+    it('handle 405 error', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .patch('/api/v1/prope')
             .send(utils.flag)
             .end((err, res) => {
                 if (err) done(err);
-                expect(res).to.have.status(404)
+                expect(res).to.have.status(405)
+                done()
+            })
+    })
+
+    it('handle get by non integer', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .get('/api/v1/property/abc')
+            .send(utils.flag)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(400)
                 done()
             })
     })

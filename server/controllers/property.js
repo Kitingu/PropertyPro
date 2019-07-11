@@ -13,7 +13,7 @@ const propertyController = {
         let result = Joi.validate(req.body, schema.property)
 
         if (result.error) {
-            userResponse.setError(400, 'failed', result.error.message)
+            userResponse.setError(400, result.error.message)
             return userResponse.send(res)
 
         }
@@ -22,11 +22,11 @@ const propertyController = {
                 let imgPath = await req.file.url
                 const property = new Property(state, city, type, price, address, contact, imgPath, ownerEmail)
                 property.save()
-                userResponse.setSuccess(201, 'success', 'property advert created successfully', property)
+                userResponse.setSuccess(201, 'property advert created successfully', property)
                 return userResponse.send(res)
 
             } catch (error) {
-                userResponse.setError(400, 'failed', 'please provide an image of type png, gif or jpg')
+                userResponse.setError(400, 'please provide an image of type png, gif or jpg')
                 return userResponse.send(res)
             }
 
@@ -39,18 +39,18 @@ const propertyController = {
         if (type) {
             const results = Property.queryByType(type)
             if (results) {
-                userResponse.setSuccess(200, "success", 'properties fetched successfully', results)
+                userResponse.setSuccess(200, 'properties fetched successfully', results)
                 return userResponse.send(res)
             }
             userResponse.setError(404, "failed", "couldnt find anything that matches the filters")
             return userResponse.send(res)
         }
         if (allProperties.length < 1) {
-            userResponse.setSuccess(200, 'success', 'no available properties at the moment', allProperties)
+            userResponse.setSuccess(200, 'no available properties at the moment', allProperties)
             return userResponse.send(res)
         }
         else {
-            userResponse.setSuccess(200, 'success', 'properties fetched successfully', allProperties)
+            userResponse.setSuccess(200, 'properties fetched successfully', allProperties)
             return userResponse.send(res)
         }
     },
@@ -58,11 +58,11 @@ const propertyController = {
         const { id } = req.params
         const property = Property.getPropertybyId(parseInt(id))
         if (property) {
-            userResponse.setSuccess(200, 'success', 'property advert fetched successfully', property)
+            userResponse.setSuccess(200, 'property advert fetched successfully', property)
             return userResponse.send(res)
         }
         else {
-            userResponse.setError(404, 'failed', `A property with id ${id} does not exist`)
+            userResponse.setError(404, `A property with id ${id} does not exist`)
             return userResponse.send(res)
 
         }
@@ -74,11 +74,11 @@ const propertyController = {
             const owner = req.user.email
             if (owner === property.owner) {
                 Property.deleteProperty(id)
-                userResponse.setSuccess(204, 'success', 'advert deleted successfully', null)
+                userResponse.setSuccess(200, 'advert deleted successfully', null)
                 userResponse.send(res)
             }
             else {
-                userResponse.setError(401, 'failed', 'you dont have the privilege to perform this task')
+                userResponse.setError(401, 'you dont have the privilege to perform this task')
                 return userResponse.send(res)
 
             }
@@ -86,7 +86,7 @@ const propertyController = {
 
         }
         else {
-            userResponse.setError(404, 'failed', `A property with id${id} does not exist`)
+            userResponse.setError(404, `A property with id${id} does not exist`)
             return userResponse.send(res)
 
         }
@@ -97,11 +97,11 @@ const propertyController = {
         if (property) {
             if (checkOwner(req, property)) {
                 Property.changePropertyStatus(property)
-                userResponse.setSuccess(200, 'success', 'property advert updated successfully', property)
+                userResponse.setSuccess(200, 'property advert updated successfully', property)
                 return userResponse.send(res)
             }
             else {
-                userResponse.setError(401, 'failed', 'you dont have the privilege to perform this task')
+                userResponse.setError(401, 'you dont have the privilege to perform this task')
                 return userResponse.send(res)
             }
         }
@@ -121,24 +121,24 @@ const propertyController = {
 
         let result = Joi.validate(req.body, schema.priceUpdate, options)
         if (result.error) {
-            userResponse.setError('400', 'failed', result.error.message)
+            userResponse.setError('400', result.error.message)
             return userResponse.send(res)
         }
         const price = req.body.price
         if (property) {
             if (checkOwner(req, property)) {
                 Property.updatePrice(property, price)
-                userResponse.setSuccess('200', 'success', "Property updated successfully", property)
+                userResponse.setSuccess('200', "Property updated successfully", property)
                 return userResponse.send(res)
             }
             else {
-                userResponse.setError('401', 'failed', "you dont have the privilege to perform this task")
+                userResponse.setError('401', "you dont have the privilege to perform this task")
                 return userResponse.send(res)
             }
 
         }
         else {
-            userResponse.setError('404', 'failed', `A property with id ${id} does not exist`)
+            userResponse.setError('404', `A property with id ${id} does not exist`)
             return userResponse.send(res)
 
         }
@@ -149,23 +149,23 @@ const propertyController = {
         const { reason, description } = req.body
         let result = Joi.validate(req.body, schema.flags, options)
         if (result.error) {
-            userResponse.setError('400', 'failed', result.error.message)
+            userResponse.setError('400', result.error.message)
             return userResponse.send(res)
         }
         if (property) {
             if (checkOwner(req, property)) {
-                userResponse.setError('403', 'failed', 'you can not flag your own property')
+                userResponse.setError('403', 'you can not flag your own property')
                 return userResponse.send(res)
             }
             else {
                 const owner = req.user.userId
                 Property.flagProperty(owner, property, reason, description)
-                userResponse.setSuccess('200', 'success', "Property flagged successfully", property)
+                userResponse.setSuccess('200', "Property flagged successfully", null)
                 return userResponse.send(res)
 
             }
         }
-        userResponse.setError('404', 'failed', "property does not exist")
+        userResponse.setError('404', "property does not exist")
         return userResponse.send(res)
 
     }

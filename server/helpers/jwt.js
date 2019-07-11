@@ -2,7 +2,14 @@ const dotenv = require('dotenv')
 dotenv.config();
 const jwt = require('jsonwebtoken')
 
-
+const createPayload = (firstname, email, isAgent, isAdmin) => {
+    return {
+        firstname,
+        email,
+        isAgent,
+        isAdmin
+    }
+}
 const encodeToken = (user) => {
     const token = jwt.sign({ user }, process.env.SECRET_KEY, { expiresIn: '2 days' })
 
@@ -10,4 +17,4 @@ const encodeToken = (user) => {
 
 }
 
-module.exports.encodeToken = encodeToken
+module.exports = { encodeToken, createPayload }

@@ -16,7 +16,7 @@ const schema = {
         email: joi.string().regex(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).required().error(onError).label('please provide a valid email'),
         password: joi.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,128}$/)
             .required().error(onError).label('password should have at least 6 characters, a uppercase,lowercase a number and a special character'),
-        isAgent: joi.boolean().required().error(onError).label('isAgent can only be true or false')
+        isAgent: joi.valid(true, false).label('isAgent can only be true or false').error(onError)
 
     }),
 

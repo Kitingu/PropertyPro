@@ -29,7 +29,6 @@ describe('test server', () => {
             .post('/api/v1/auth/signup')
             .end((err, res) => {
                 if (err) done(err);
-                expect('foo').to.be.a('string');
                 expect(res).to.have.status(400)
                 done()
             })
@@ -43,6 +42,8 @@ describe('test server', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(201)
+                expect(res.body.message).equals("User registered successfully");
+
                 done()
             })
     })
@@ -54,6 +55,8 @@ describe('test server', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(409)
+                expect(res.body.error).equals("user with nelson@gmail.com already exists please login")
+
                 done()
             })
     })
@@ -65,6 +68,8 @@ describe('test server', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(200)
+                expect(res.body.message).equals("logged in successfully");
+
                 done()
             })
     })
@@ -75,6 +80,7 @@ describe('test server', () => {
             .send(utils.invalid_login)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("Invalid user login credentials");
                 expect(res).to.have.status(400)
                 done()
             })
@@ -83,10 +89,13 @@ describe('test server', () => {
     it('user login without fields', (done) => {
         chai.request(app)
             .post('/api/v1/auth/signin')
-            .send({"":""})
+            .send({ "email": "" })
             .end((err, res) => {
                 if (err) done(err);
+                console.log(res.body.error);
+
                 expect(res).to.have.status(400)
+                expect(res.body.error).equals("email is required")
                 done()
             })
     })

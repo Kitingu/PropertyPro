@@ -12,6 +12,7 @@ const compareHash = (password, hashedPassword) => {
     }
 }
 
+
 class Response {
     constructor() {
         this.statusCode = null;
@@ -21,24 +22,22 @@ class Response {
         this.message = null;
     }
 
-    setSuccess(statusCode, status, message, data) {
+    setSuccess(statusCode, message, data) {
         this.statusCode = statusCode;
-        this.status = status
         this.message = message;
         this.data = data;
         this.type = 'success';
     }
 
-    setError(statusCode, status, message) {
+    setError(statusCode, message) {
         this.statusCode = statusCode;
-        this.status = status
         this.message = message;
         this.type = 'error';
     }
 
     send(res) {
         const result = {
-            status: this.status,
+            status: this.statusCode,
             message: this.message,
             data: this.data
         };
@@ -47,8 +46,8 @@ class Response {
             return res.status(this.statusCode).json(result);
         }
         return res.status(this.statusCode).json({
-            status: this.status,
-            message: this.message
+            status: this.statusCode,
+            error: this.message
         });
     }
 }
