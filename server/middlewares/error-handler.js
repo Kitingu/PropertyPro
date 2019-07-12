@@ -9,7 +9,7 @@ const handlers = {
     },
     async handle500(error, req, res, next) {
         res.status(error.status || 500)
-        userResponse.setError(error.status || 500, 'failed',"something i")
+        userResponse.setError(error.status || 500, 200, "something went wrong")
         return userResponse.send(res)
 
     },

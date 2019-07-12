@@ -17,15 +17,13 @@ const jwtHelper = {
             const user = User.getUserByEmail(decoded.user.email)
             req.user = user
             if (!user) {
-                userResponse.setError(400, 'failed', 'invalid token please sign up')
+                userResponse.setError(400, 'invalid token please sign up')
                 return userResponse.send(res)
             }
             next()
-
-
         }
         catch (error) {
-            userResponse.setError(400, 'failed', 'please provide a valid token')
+            userResponse.setError(400, 'please provide a valid token')
             return userResponse.send(res)
         }
 

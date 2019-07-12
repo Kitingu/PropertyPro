@@ -13,6 +13,8 @@ const propertyController = {
         let result = Joi.validate(req.body, schema.property)
 
         if (result.error) {
+            console.log(result.error);
+
             userResponse.setError(400, result.error.message)
             return userResponse.send(res)
 
@@ -38,14 +40,16 @@ const propertyController = {
         const { type } = req.query
         if (type) {
             const results = Property.queryByType(type)
-            if (results) {
+            console.log(results);
+
+            if (results.length) {
                 userResponse.setSuccess(200, 'properties fetched successfully', results)
                 return userResponse.send(res)
             }
-            userResponse.setError(404, "failed", "couldnt find anything that matches the filters")
+            userResponse.setError(404, "couldnt find anything that matches the filters")
             return userResponse.send(res)
         }
-        if (allProperties.length < 1) {
+        if (allProperties.length > 1) {
             userResponse.setSuccess(200, 'no available properties at the moment', allProperties)
             return userResponse.send(res)
         }

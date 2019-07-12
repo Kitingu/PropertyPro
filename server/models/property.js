@@ -56,7 +56,7 @@ class Property {
         property.price = price
     }
     static queryByType(type) {
-        return properties.find(property => property.type === type)
+        return properties.filter(property => property.type === type.toLowerCase())
     }
     static flagProperty(userId, property, reason, description) {
         const flag = {
