@@ -1,0 +1,433 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Welcome to the PropertyPro system documentation.",
+        "version": "1.0.0",
+        "title": "Property Pro",
+        "contact": {
+            "email": "benlegendj@gmail.com",
+            "name": "Benedict Kitingu",
+            "url": "https://github.com/kitingu"
+        }
+    },
+    "host": "bendeh-property.herokuapp.com",
+    "basePath": "/api/v1",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/auth/signup": {
+            "post": {
+                "summary": "Creates a new user",
+                "description": "The auth/signin endpoint registes a user On success the response code is `201` for `Created`.",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "user",
+                        "description": "The user to create.",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User registered successfully"
+                    },
+                    "400": {
+                        "description": "User already exists or invalid user input"
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/auth/signin": {
+            "post": {
+                "summary": "Log in user",
+                "description": "The auth/login endpoint authenticates users to use propertypro API. The endpoint accepts two string parameters `username` and `password` as a JSON object. On successful login the user gets a JWT token, else the user will get an error response in JSON object",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "login",
+                        "description": "login user.",
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "log in successful, Token generated"
+                    },
+                    "400": {
+                        "description": "Invalid email or password"
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/property": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "Add a new property",
+                "description": "This endpoint accepts property details in multi-part form, creates a property and returns a json response Auth token is required to add a property",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "image_url",
+                        "in": "formData",
+                        "description": "file to upload",
+                        "required": true,
+                        "type": "file"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "type of the property eg two bedroom",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "price",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "contact",
+                        "in": "formData",
+                        "description": "owners phone number",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "property created"
+                    },
+                    "401": {
+                        "description": "Error occured"
+                    }
+                },
+                "tags": [
+                    "property"
+                ]
+            },
+            "get": {
+                "summary": "Get all available property adverts",
+                "description": "This endpoint will return a json object of all property items.",
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return all property adverts"
+                    }
+                },
+                "tags": [
+                    "property"
+                ]
+            }
+        },
+        "/property/{property_id}": {
+            "get": {
+                "summary": "Get a single property",
+                "description": "This endpoint returns a json object of a specific property",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "property_id",
+                        "in": "path",
+                        "description": "Id of property to list details for",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "property not found"
+                    }
+                },
+                "tags": [
+                    "property"
+                ]
+            }
+        },
+        "/property/{property_id}/price": {
+            "patch": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "Update the price of a prperty advert.",
+                "description": "This endpoint acccepts a json object. You can only update a property if you are an agent and you own the property.",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "property data",
+                        "description": "property name.",
+                        "schema": {
+                            "$ref": "#/definitions/price"
+                        }
+                    },
+                    {
+                        "name": "property_id",
+                        "in": "path",
+                        "description": "Id of property to be updated",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update property"
+                    },
+                    "401": {
+                        "description": "Error occured"
+                    },
+                    "404": {
+                        "description": "Property not found"
+                    }
+                },
+                "tags": [
+                    "property"
+                ]
+            }
+        },
+        "/property/{property_id}/sold": {
+            "patch": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "Mark a property advert as sold",
+                "description": "You can only mark a property as sold if you are an agent and you own the property.",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "property_id",
+                        "in": "path",
+                        "description": "Id of property to be updated",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update property"
+                    },
+                    "401": {
+                        "description": "Error occured"
+                    },
+                    "404": {
+                        "description": "Property not found"
+                    }
+                },
+                "tags": [
+                    "property"
+                ]
+            }
+        },
+        "/property/{property_id}/flag": {
+            "patch": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "Flag a property advert  as fraudulent",
+                "description": "You can only flag a property as fraudulent if you are logged in and you don\\'t own the property.",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/flag"
+                        }
+                    },
+                    {
+                        "name": "property_id",
+                        "in": "path",
+                        "description": "Id of property to be updated",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update property"
+                    },
+                    "401": {
+                        "description": "Error occured"
+                    },
+                    "404": {
+                        "description": "Property not found"
+                    }
+                },
+                "tags": [
+                    "property"
+                ]
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "Delete a property",
+                "description": "This end point will delete the property. To delete a property you must be an admin",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "property_id",
+                        "in": "path",
+                        "description": "Id of property to delete",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "property"
+                ]
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "Login": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "User": {
+            "type": "object",
+            "required": [
+                "firstname",
+                "lastname",
+                "email",
+                "role",
+                "password"
+            ],
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "price": {
+            "type": "object",
+            "required": [
+                "price"
+            ],
+            "properties": {
+                "price": {
+                    "type": "integer"
+                }
+            }
+        },
+        "flag": {
+            "type": "object",
+            "required": [
+                "reason",
+                "description"
+            ],
+            "properties": {
+                "reason": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

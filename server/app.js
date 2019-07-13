@@ -6,6 +6,7 @@ const propertyRoutes = require('./routes/propertyroutes')
 const authRoutes = require('./routes/authroutes')
 const morgan = require('morgan')
 const app = express()
+const cors = require('cors')
 
 app.use(morgan('dev'));
 app.use(express.json())
@@ -21,6 +22,8 @@ app.use(handle404)
 //handle 500
 app.use(handle500)
 
+//cross origin resource sharing
+app.use(cors)
 
 
 const PORT = config.appConfig.port || 3000
