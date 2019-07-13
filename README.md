@@ -1,9 +1,9 @@
 # PropertyPro
 Property Pro Lite is a platform where people can create and/or search properties for sale or rent.
 
-
-[![ForTheBadge uses-git](http://ForTheBadge.com/images/badges/uses-git.svg)](https://GitHub.com/) [![ForTheBadge uses-html](http://ForTheBadge.com/images/badges/uses-html.svg)](http://ForTheBadge.com) [![ForTheBadge uses-css](http://ForTheBadge.com/images/badges/uses-css.svg)](http://ForTheBadge.com) [![ForTheBadge uses-js](http://ForTheBadge.com/images/badges/uses-js.svg)](http://ForTheBadge.com)
-
+[![Build Status](https://travis-ci.com/Kitingu/PropertyPro.svg?branch=develop)](https://travis-ci.com/Kitingu/PropertyPro)
+[![Coverage Status](https://coveralls.io/repos/github/Kitingu/PropertyPro/badge.svg?branch=develop)](https://coveralls.io/github/Kitingu/PropertyPro?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/70a37e06812a257be534/maintainability)](https://codeclimate.com/github/Kitingu/PropertyPro/maintainability)
 
 ### Required Features
 
@@ -25,17 +25,39 @@ Property Pro Lite is a platform where people can create and/or search properties
 * The application should display a Google Map with Marker showing the red-flag or
 intervention location.
 
+#### Endpoints
+| Method        | Endpoint                 | Description|
+| ------------- | --------------------------|------------|
+| POST           |`/auth/signup`   |User create an account|
+| POST          | `/auth/signin`   |Sign in / log in a user |
+| POST        | `/property`    |Create a property advert|
+| GET | `/property`|Fetch all available property adverts|
+| GET          | `/property/<:property-id>`|get a specific advert|
+| DELETE       | `/property/<:propertyId>` |Delete an delete advert you own|
+| PATCH         | `/property/<:propertyId>/price`| Update the price of a property advert|
+| PATCH          | `/property/<:property-id>/sold`       |Mark an advert as sold|
+| GET  |`/api/v1/property?type=property-type` |get all available property adverts of specific type|
+| POST          | `/property/<:property-id>/flag`      |Flag an advert as fraudulent|
+
+
+
 #### How to run the application locally
 
 >1. Create a local working space (Folder)
->2. Open teminal and navigate to the folder
+>2. Open teminal and navigate to the folder reated above.
 >3. git clone https://github.com/kitingu/propertypro.git
->4. change directory to UI folder and open the index page with your a browser of your choice
+>4. Run `npm install` to install dependencies.
+>5. Run `npm run devstart` to run the application.
+>6. Open `Postman` to test the endpoints above.
+
+
 
 #### Where to get the User interface
 
 Navigate to https://kitingu.github.io/propertypro/UI/index.html to view the pages
 
+#### Documentation: [Heroku](https://propertypro-v1.herokuapp.com/api/v1/)
+
 #### Author: Benedict Mwendwa
 
-#### License: ![GitHub](https://img.shields.io/github/license/kitingu/propertypro.svg)
+#### License: [MIT](https://github.com/Kitingu/PropertyPro/blob/develop/LICENSE)
