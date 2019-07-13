@@ -1,20 +1,22 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6
-    },
     "env": {
-        "node": true,
-        "es6": true,
-        "browser": true
+        "browser": true,
+        "es6": true
     },
+    "extends": [
+        "airbnb-base"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly",
         "describe": "readonly",
         "it": "readonly",
         "before": "readonly",
-        "after": "readonly",
         "after": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
     },
     "rules": {
         "comma-dangle": "warn",

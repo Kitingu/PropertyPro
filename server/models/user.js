@@ -1,39 +1,40 @@
-require('dotenv')
-const uuidv4 = require('uuid/v4')
-let users = []
+require('dotenv');
+const uuidv4 = require('uuid/v4');
+
+const users = [];
 
 class User {
-    constructor(firstname, lastname, email, password, isAgent) {
-        this.id = uuidv4()
-        this.firstname = firstname
-        this.lastname = lastname
-        this.email = email
-        this.password = password
-        this.isAgent = isAgent
-        this.isAdmin = false
-    }
-    save() {
-        let user = {
-            userId: this.id,
-            firstname: this.firstname,
-            lastname: this.lastname,
-            username: this.firstname + this.lastname,
-            email: this.email,
-            password: this.password,
-            isAgent:this.isAgent,
-            isAdmin: this.isAdmin
-        }
+  constructor(firstname, lastname, email, password, isAgent) {
+    this.id = uuidv4();
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.email = email;
+    this.password = password;
+    this.isAgent = isAgent;
+    this.isAdmin = false;
+  }
 
-        users.push(user)
-    }
+  save() {
+    const user = {
+      userId: this.id,
+      firstname: this.firstname,
+      lastname: this.lastname,
+      username: this.firstname + this.lastname,
+      email: this.email,
+      password: this.password,
+      isAgent: this.isAgent,
+      isAdmin: this.isAdmin,
+    };
 
-    static getUserByEmail(email) {
-        return users.find(user => user.email === email)
-    }
+    users.push(user);
+  }
 
+  static getUserByEmail(email) {
+    return users.find(user => user.email === email);
+  }
 }
 
 module.exports = {
-    users,
-    User
-}
+  users,
+  User,
+};
