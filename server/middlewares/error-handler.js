@@ -10,7 +10,7 @@ const handlers = {
   },
   async handle500(error, req, res, next) {
     res.status(error.status || 500);
-    userResponse.setError(error.status || 500, 200, 'something went wrong');
+    userResponse.setError(error.status || 500, error.message);
     return userResponse.send(res);
   },
   async methodNotAllowed(req, res, next) {
