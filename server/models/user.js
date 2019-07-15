@@ -4,7 +4,7 @@ const uuidv4 = require('uuid/v4');
 const users = [];
 
 class User {
-  constructor(firstname, lastname, email, password, isAgent) {
+  constructor(firstname, lastname, email, password, isAgent = false) {
     this.id = uuidv4();
     this.firstname = firstname;
     this.lastname = lastname;
