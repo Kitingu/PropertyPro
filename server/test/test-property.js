@@ -42,6 +42,7 @@ describe('test properties', () => {
 
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.message).equals("property advert created successfully");
                 expect(res).to.have.status(201)
                 done()
             })
@@ -63,6 +64,7 @@ describe('test properties', () => {
 
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("please provide a valid token");
                 expect(res).to.have.status(400)
                 done()
             })
@@ -83,6 +85,7 @@ describe('test properties', () => {
 
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("please provide an image of type png, gif or jpg");
                 expect(res).to.have.status(400)
                 done()
             })
@@ -105,6 +108,8 @@ describe('test properties', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(400)
+                expect(res.body.error).equals("city should have at least three alphabetic characters");
+
                 done()
             })
     })
@@ -116,7 +121,7 @@ describe('test properties', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(200)
-
+                expect(res.body.message).equals("properties fetched successfully");
                 done()
             })
     })
@@ -127,7 +132,7 @@ describe('test properties', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(200)
-
+                expect(res.body.message).equals("properties fetched successfully");
                 done()
             })
     })
@@ -139,7 +144,7 @@ describe('test properties', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(404)
-
+                expect(res.body.error).equals("A property with id 9 does not exist");
                 done()
             })
     })
@@ -153,6 +158,7 @@ describe('test properties', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(200)
+                expect(res.body.message).equals("advert deleted successfully");
                 done()
             })
 
@@ -165,6 +171,7 @@ describe('test properties', () => {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(200)
+                expect(res.body.message).equals("property advert fetched successfully")
                 done()
             })
 
@@ -176,6 +183,7 @@ describe('test properties', () => {
             .get('/api/v1/property?type=two')
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.message).equals("properties fetched successfully")
                 expect(res).to.have.status(200)
                 done()
             })
@@ -188,6 +196,7 @@ describe('test properties', () => {
             .get('/api/v1/property?type=car')
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("couldnt find anything that matches the filters")
                 expect(res).to.have.status(404)
                 done()
             })
@@ -203,6 +212,7 @@ describe('test properties', () => {
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("A property with id5 does not exist");
                 expect(res).to.have.status(404)
                 done()
             })
@@ -216,6 +226,7 @@ describe('test properties', () => {
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("you dont have the privilege to perform this task");
                 expect(res).to.have.status(401)
                 done()
             })
@@ -228,6 +239,7 @@ describe('test properties', () => {
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.message).equals("property advert updated successfully");
                 expect(res).to.have.status(200)
                 done()
             })
@@ -241,6 +253,8 @@ describe('test properties', () => {
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("resource not found");
+
                 expect(res).to.have.status(404)
                 done()
             })
@@ -269,6 +283,8 @@ describe('test properties', () => {
             .send(utils.newPrice)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.message).equals("Property updated successfully");
+
                 expect(res).to.have.status(200)
                 done()
             })
@@ -282,6 +298,7 @@ describe('test properties', () => {
             .send(utils.invalidPrice)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("price should only include numbers greater than 0");
                 expect(res).to.have.status(400)
                 done()
             })
@@ -296,6 +313,7 @@ describe('test properties', () => {
             .send(utils.newPrice)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("you dont have the privilege to perform this task")
                 expect(res).to.have.status(401)
                 done()
             })
@@ -310,6 +328,7 @@ describe('test properties', () => {
             .send(utils.newPrice)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("A property with id 9 does not exist");
                 expect(res).to.have.status(404)
                 done()
             })
@@ -324,6 +343,7 @@ describe('test properties', () => {
             .send(utils.flag)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.message).equals("Property flagged successfully");
                 expect(res).to.have.status(200)
                 done()
             })
@@ -338,6 +358,7 @@ describe('test properties', () => {
             .send(utils.invalidFlag)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("please provide a valid reason")
                 expect(res).to.have.status(400)
                 done()
             })
@@ -353,6 +374,7 @@ describe('test properties', () => {
             .send(utils.flag)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("property does not exist")
                 expect(res).to.have.status(404)
                 done()
             })
@@ -367,6 +389,7 @@ describe('test properties', () => {
             .send(utils.flag)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("you can not flag your own property");
                 expect(res).to.have.status(403)
                 done()
             })
@@ -380,6 +403,7 @@ describe('test properties', () => {
             .send(utils.flag)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("This method is not allowed")
                 expect(res).to.have.status(405)
                 done()
             })
@@ -392,7 +416,9 @@ describe('test properties', () => {
             .send(utils.flag)
             .end((err, res) => {
                 if (err) done(err);
+                expect(res.body.error).equals("property id should only be a number")
                 expect(res).to.have.status(400)
+
                 done()
             })
     })

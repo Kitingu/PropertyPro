@@ -1,6 +1,4 @@
 require('dotenv');
-const Joi = require('@hapi/joi');
-const { schema, options } = require('../helpers/validator');
 const { Property } = require('../models/property');
 const { checkOwner, Response } = require('../helpers/utils');
 
@@ -11,13 +9,6 @@ const propertyController = {
     const {
       state, city, type, price, address, contact,
     } = req.body;
-
-    const result = Joi.validate(req.body, schema.property);
-
-    if (result.error) {
-      userResponse.setError(400, result.error.message);
-      return userResponse.send(res);
-    }
 
     try {
       const imgPath = await req.file.url;
@@ -106,12 +97,6 @@ const propertyController = {
   async updatePrice(req, res) {
     const { id } = req.params;
     const property = Property.getPropertybyId(parseInt(id));
-
-    const result = Joi.validate(req.body, schema.priceUpdate, options);
-    if (result.error) {
-      userResponse.setError('400', result.error.message);
-      return userResponse.send(res);
-    }
     const { price } = req.body;
     if (property) {
       if (checkOwner(req, property)) {
@@ -131,11 +116,7 @@ const propertyController = {
     const { id } = req.params;
     const property = Property.getPropertybyId(parseInt(id));
     const { reason, description } = req.body;
-    const result = Joi.validate(req.body, schema.flags, options);
-    if (result.error) {
-      userResponse.setError('400', result.error.message);
-      return userResponse.send(res);
-    }
+
     if (property) {
       if (checkOwner(req, property)) {
         userResponse.setError('403', 'you can not flag your own property');
