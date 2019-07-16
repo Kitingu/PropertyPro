@@ -1,3 +1,8 @@
-PORT=7000
-NODE_ENV=development
-SECRET_KEY='this is secret'
+PORT=3000
+NODE_ENV="test development or production"
+SECRET_KEY=""
+CLOUDINARY_CLOUD_NAME=""
+CLOUDINARY_API_KEY=""
+CLOUDINARY_API_SECRET=""
+DATABASE_URL='postgres://username:password@host:5432/database'
+TEST_DATABASE='postgres://username:password@host:5432/database''
