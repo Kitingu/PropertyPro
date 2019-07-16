@@ -1,11 +1,10 @@
 require('dotenv');
 const uuidv4 = require('uuid/v4');
-
-const users = [];
+const { db } = require('./db/db')
+const users = []
 
 class User {
   constructor(firstname, lastname, email, password, isAgent = false) {
-    this.id = uuidv4();
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
@@ -14,23 +13,18 @@ class User {
     this.isAdmin = false;
   }
 
-  save() {
-    const user = {
-      userId: this.id,
-      firstname: this.firstname,
-      lastname: this.lastname,
-      username: this.firstname + this.lastname,
-      email: this.email,
-      password: this.password,
-      isAgent: this.isAgent,
-      isAdmin: this.isAdmin,
-    };
-
-    users.push(user);
+  async save() {
+    const query = `INSERT INTO users(firstname,lastname,email,password,isAgent,isAdmin) VALUES($1, $2, $3, $4, $5, $6) returning *`
+    const values = [this.firstname, this.lastname, this.email, this.password, this.isAgent, this.isAdmin]
+    const { rows } = await db.queryWithParams(query, values)
+    return rows[0]
   }
 
-  static getUserByEmail(email) {
-    return users.find(user => user.email === email);
+  static async getUserByEmail(email) {
+    const query = `SELECT * from users where email = $1`
+    const values = [email]
+    const { rows } = await db.queryWithParams(query, values)
+    return rows[0]
   }
 }
 

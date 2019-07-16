@@ -1,6 +1,4 @@
 const dotenv = require('dotenv');
-const Joi = require('@hapi/joi');
-const { schema, options } = require('../middlewares/validators');
 const { User } = require('../models/user');
 const { encodeToken, createPayload } = require('../helpers/jwt');
 const { hashPassword, compareHash } = require('../helpers/utils');
@@ -14,12 +12,11 @@ const userController = {
     const {
       firstname, lastname, email, password, isAgent,
     } = req.body;
-    const user = User.getUserByEmail(email);
+    const user = await User.getUserByEmail(email);
     if (!user) {
       const hashedPassword = hashPassword(password);
       const user1 = new User(firstname, lastname, email, hashedPassword, isAgent);
 
-      user1.save();
       user1.save();
       const data = {
         firstname: user1.firstname,
@@ -40,6 +37,7 @@ const userController = {
       return userResponse.send(res);
     }
   },
+
 
   async login(req, res) {
     const { email, password } = req.body;
