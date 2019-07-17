@@ -5,20 +5,8 @@ const { app } = require('../app');
 const { users } = require('../models/user');
 chai.use(chaiHttp);
 const { expect } = chai;
-const { db } = require('../models/db/db')
 
 describe('test server', () => {
-
-
-  // before('clear the database', (done) => {
-  //   chai.request(app)
-  //   done()
-  // });
-
-
-  // after((done) => {
-  //   done()
-  // });
 
   it('should test sign up with no input', (done) => {
     chai.request(app)
@@ -42,14 +30,14 @@ describe('test server', () => {
       });
   });
 
-  it.skip('should test double user sign up', (done) => {
+  it('should test double user sign up', (done) => {
     chai.request(app)
       .post('/api/v2/auth/signup')
       .send(utils.user)
       .end((err, res) => {
         if (err) done(err);
         expect(res).to.have.status(409);
-        expect(res.body.error).equals('user with nelson@gmail.com already exists please login');
+        expect(res.body.error).equals('user with asdf@gmail.com already exists please login');
         done();
       });
   });
@@ -67,7 +55,7 @@ describe('test server', () => {
       });
   });
 
-  it.skip('should invalid user login', (done) => {
+  it('should invalid user login', (done) => {
     chai.request(app)
       .post('/api/v2/auth/signin')
       .send(utils.invalid_login)
@@ -79,7 +67,7 @@ describe('test server', () => {
       });
   });
 
-  it.skip('user login without fields', (done) => {
+  it('user login without fields', (done) => {
     chai.request(app)
       .post('/api/v2/auth/signin')
       .send({ email: '' })

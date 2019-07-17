@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node server/app.js",
     "createTable": "node server/models/db/migrations.js ",
-    "drop": "node server/models/db/drop-tables.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha server/test --no-timeout  --exit",
     "devstart": "nodemon --require babel-core/register --require babel-polyfill server/app.js",

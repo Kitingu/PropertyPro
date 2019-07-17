@@ -1,6 +1,5 @@
 const config = require('../../../config');
 const DATABASE_URL = config.appConfig.DATABASE_URL
-const createTable = require('./tables')
 const { Pool } = require('pg');
 
 class Database {
@@ -33,15 +32,6 @@ class Database {
 
     }
 
-    async createTables() {
-        await this.basicQuery(createTable)
-    }
-
-    async dropTables() {
-        const queryText = 'DROP TABLE IF EXISTS users, properties, flags, images  CASCADE';
-        await this.basicQuery(queryText)
-    };
-
 }
 
 const db = new Database();
@@ -57,5 +47,6 @@ db.pool.on('error', () => {
 });
 
 module.exports.db = db;
-//  db.createTables()
+
+
 

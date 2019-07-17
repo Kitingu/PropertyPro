@@ -13,7 +13,7 @@ before_script:
   - npm run createTable
 env:
   global:
-    -postgresql://postgres@localhost/testdb
+    -atleast
 
 install:
   - npm install
