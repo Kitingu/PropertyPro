@@ -14,7 +14,7 @@ const jwtHelper = {
       const bearerHeader = req.headers.authorization;
       const token = bearerHeader.split(' ')[1];
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
-      const user = User.getUserByEmail(decoded.user.email);
+      const user = await User.getUserByEmail(decoded.user.email);
       req.user = user;
       if (!user) {
         userResponse.setError(400, 'invalid token please sign up');

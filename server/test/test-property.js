@@ -6,13 +6,37 @@ const { properties } = require('../models/property')
 chai.use(chaiHttp)
 const { expect } = chai;
 
+let token
 
 describe('test properties', () => {
 
-    it.skip('create property advert', (done) => {
+    before((done) => {
 
         chai.request(app)
-            .post('/api/v1/property')
+            .post('/api/v2/auth/signup')
+            .send(utils.user2)
+            .end((err, res) => {
+                token = res.body.data.token
+                done()
+            })
+    })
+
+    it('should test get all properties when non exists', (done) => {
+        chai.request(app)
+            .get('/api/v2/property')
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+                expect(res.body.message).equals("no available properties at the moment");
+                done()
+            })
+    })
+
+
+    it('create property advert', (done) => {
+
+        chai.request(app)
+            .post('/api/v2/property')
             .set('Authorization', `Bearer ${token}`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .attach('image', 'server/test/test.jpg', 'test.jpg')
@@ -32,10 +56,10 @@ describe('test properties', () => {
     })
 
 
-    it.skip('create property without token', (done) => {
+    it('create property without token', (done) => {
 
         chai.request(app)
-            .post('/api/v1/property')
+            .post('/api/v2/property')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .attach('image', 'server/test/test.jpg', 'test.jpg')
             .field('type', 'miniflat')
@@ -53,10 +77,10 @@ describe('test properties', () => {
             })
     })
 
-    it.skip('create property without image upload', (done) => {
+    it('create property without image upload', (done) => {
 
         chai.request(app)
-            .post('/api/v1/property')
+            .post('/api/v2/property')
             .set('Authorization', `Bearer ${token}`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .field('type', 'miniflat')
@@ -74,10 +98,10 @@ describe('test properties', () => {
             })
 
     })
-    it.skip('create property with invalid user input', (done) => {
+    it('create property with invalid user input', (done) => {
 
         chai.request(app)
-            .post('/api/v1/property')
+            .post('/api/v2/property')
             .set('Authorization', `Bearer ${token}`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .attach('image', 'server/test/test.jpg', 'test.jpg')
@@ -109,16 +133,7 @@ describe('test properties', () => {
             })
     })
 
-    it('should test get all properties when non exists', (done) => {
-        chai.request(app)
-            .get('/api/v2/property')
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res).to.have.status(200)
-                expect(res.body.message).equals("no available properties at the moment");
-                done()
-            })
-    })
+
 
 
     it.skip('should test get a non existing single properties', (done) => {

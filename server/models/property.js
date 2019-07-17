@@ -18,22 +18,11 @@ class Property {
     this.flags = [];
   }
 
-  save() {
-    const property = {
-      propertyId: this.propertyId,
-      status: this.status,
-      state: this.state,
-      city: this.city,
-      type: this.type,
-      price: this.price,
-      address: this.address,
-      image_url: this.image_url,
-      contact: this.contact,
-      owner: this.owner,
-      flags: this.flags,
-    };
-
-    properties.push(property);
+  async save() {
+    const query = `INSERT INTO properties(status,state,city,type,price,address,contact,image_url,owner) VALUES($1, $2, $3, $4, $5, $6, $7, $8,$9) returning *`
+    const values = [this.status, this.state, this.city, this.type, this.price, this.address, this.contact, this.image_url, this.owner]
+    const { rows } = await db.queryWithParams(query, values)
+    return rows[0]
   }
 
   static getPropertybyId(id) {

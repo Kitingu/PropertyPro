@@ -13,6 +13,13 @@ const utils = {
     password: 'asdQ@123',
     isAgent: true,
   },
+  user2: {
+    firstname: 'charles',
+    lastname: 'asdf',
+    email: 'admin@gmail.com',
+    password: 'asdQ@123',
+    isAgent: true,
+  },
   userLogin1: {
     email: 'asdf@gmail.com',
     password: 'asdQ@123',
