@@ -24,7 +24,8 @@ const propertyController = {
   },
 
   async getAll(req, res) {
-    const allProperties = Property.getAllProperties();
+    const allProperties = await Property.getAllProperties();
+
     const { type } = req.query;
     if (type) {
       const results = Property.queryByType(type);
@@ -36,7 +37,7 @@ const propertyController = {
       userResponse.setError(404, 'couldnt find anything that matches the filters');
       return userResponse.send(res);
     }
-    if (allProperties.length > 1) {
+    if (!allProperties.length) {
       userResponse.setSuccess(200, 'no available properties at the moment', allProperties);
       return userResponse.send(res);
     }

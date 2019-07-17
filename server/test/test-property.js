@@ -109,13 +109,13 @@ describe('test properties', () => {
             })
     })
 
-    it.skip('should test get all properties when non exists', (done) => {
+    it('should test get all properties when non exists', (done) => {
         chai.request(app)
-            .get('/api/v1/property')
+            .get('/api/v2/property')
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(200)
-                expect(res.body.message).equals("properties fetched successfully");
+                expect(res.body.message).equals("no available properties at the moment");
                 done()
             })
     })
