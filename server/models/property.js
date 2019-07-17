@@ -25,8 +25,14 @@ class Property {
     return rows[0]
   }
 
-  static getPropertybyId(id) {
-    return properties.find(property => property.propertyId === id);
+  static async getPropertybyId(id) {
+    const query = `SELECT * from properties where propertyId = $1`
+    const values = [id]
+    const { rows } =  await db.queryWithParams(query, values)
+    if (rows) {
+      return rows[0]
+    }
+    return false
   }
 
 

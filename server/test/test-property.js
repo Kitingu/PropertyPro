@@ -55,6 +55,18 @@ describe('test properties', () => {
             })
     })
 
+    it('gets a single property advert', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .get('/api/v2/property/1')
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+                expect(res.body.message).equals("property advert fetched successfully")
+                done()
+            })
+
+    })
 
     it('create property without token', (done) => {
 
@@ -136,9 +148,9 @@ describe('test properties', () => {
 
 
 
-    it.skip('should test get a non existing single properties', (done) => {
+    it('should test get a non existing single properties', (done) => {
         chai.request(app)
-            .get('/api/v1/property/9')
+            .get('/api/v2/property/9')
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(404)
@@ -162,18 +174,7 @@ describe('test properties', () => {
 
     })
 
-    it.skip('gets a single property advert', (done) => {
-        properties.push(utils.sample_property)
-        chai.request(app)
-            .get('/api/v1/property/2')
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res).to.have.status(200)
-                expect(res.body.message).equals("property advert fetched successfully")
-                done()
-            })
 
-    })
 
     it.skip('gets a single property by type', (done) => {
         properties.push(utils.sample_property)

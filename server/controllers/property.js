@@ -48,7 +48,7 @@ const propertyController = {
   },
   async getSpecificAdvert(req, res) {
     const { id } = req.params;
-    const property = Property.getPropertybyId(parseInt(id));
+    const property = await Property.getPropertybyId(parseInt(id));
     if (property) {
       userResponse.setSuccess(200, 'property advert fetched successfully', property);
       return userResponse.send(res);
