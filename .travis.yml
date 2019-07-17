@@ -5,9 +5,20 @@ node_js:
 cache:
   directories:
     - "node_modules"
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'CREATE DATABASE testdb;' -U postgres
+  - npm run createTable
+env:
+  global:
+    -atleast
+
 install:
   - npm install
 script:
+  - npm run createTable
   - npm run test
 after_success:
   - npm run coverage

@@ -1,6 +1,4 @@
 const dotenv = require('dotenv');
-const Joi = require('@hapi/joi');
-const { schema, options } = require('../middlewares/validators');
 const { User } = require('../models/user');
 const { encodeToken, createPayload } = require('../helpers/jwt');
 const { hashPassword, compareHash } = require('../helpers/utils');
@@ -14,13 +12,12 @@ const userController = {
     const {
       firstname, lastname, email, password, isAgent,
     } = req.body;
-    const user = User.getUserByEmail(email);
+    const user = await User.getUserByEmail(email);
     if (!user) {
       const hashedPassword = hashPassword(password);
       const user1 = new User(firstname, lastname, email, hashedPassword, isAgent);
 
-      user1.save();
-      user1.save();
+      await user1.save();
       const data = {
         firstname: user1.firstname,
         lastname: user1.lastname,
@@ -41,6 +38,7 @@ const userController = {
     }
   },
 
+
   async login(req, res) {
     const { email, password } = req.body;
     if (!email) {
@@ -51,10 +49,10 @@ const userController = {
       userResponse.setError(400, 'password is required');
       return userResponse.send(res);
     }
-    const user = User.getUserByEmail(email);
+    const user = await User.getUserByEmail(email);
     if (user) {
       if (compareHash(password, user.password)) {
-        const token = encodeToken(user);
+        const token = encodeToken(createPayload(user.firstname, user.email, user.isAgent, user.isAdmin));
         userResponse.setSuccess(200, 'logged in successfully', token);
         return userResponse.send(res);
       }

@@ -10,17 +10,32 @@ class Database {
     }
 
     async basicQuery(query) {
-        const res = await this.pool.query(query);
-        return res;
+
+        try {
+            const res = await this.pool.query(query);
+            return res;
+        } catch (error) {
+            console.log(error);
+
+        }
     }
 
     async queryWithParams(text, params) {
-        const res = await this.pool.query(text, params);
-        return res;
+
+        try {
+            const res = await this.pool.query(text, params);
+            return res;
+        } catch (error) {
+            setImmediate(() => { throw error })
+        }
+
+
     }
+
 }
 
 const db = new Database();
+
 
 db.pool.on('connect', () => {
     console.log('you are now connected to the db');
@@ -32,3 +47,6 @@ db.pool.on('error', () => {
 });
 
 module.exports.db = db;
+
+
+

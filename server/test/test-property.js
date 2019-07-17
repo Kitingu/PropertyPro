@@ -6,27 +6,10 @@ const { properties } = require('../models/property')
 chai.use(chaiHttp)
 const { expect } = chai;
 
-let token
+
 describe('test properties', () => {
 
-    before((done) => {
-
-        chai.request(app)
-            .post('/api/v1/auth/signup')
-            .send(utils.user)
-            .end((err, res) => {
-                token = res.body.data.token
-                done()
-            })
-
-    })
-
-    afterEach((done) => {
-        properties.length = 0
-        done()
-    })
-
-    it('create property advert', (done) => {
+    it.skip('create property advert', (done) => {
 
         chai.request(app)
             .post('/api/v1/property')
@@ -49,7 +32,7 @@ describe('test properties', () => {
     })
 
 
-    it('create property without token', (done) => {
+    it.skip('create property without token', (done) => {
 
         chai.request(app)
             .post('/api/v1/property')
@@ -70,7 +53,7 @@ describe('test properties', () => {
             })
     })
 
-    it('create property without image upload', (done) => {
+    it.skip('create property without image upload', (done) => {
 
         chai.request(app)
             .post('/api/v1/property')
@@ -91,7 +74,7 @@ describe('test properties', () => {
             })
 
     })
-    it('create property with invalid user input', (done) => {
+    it.skip('create property with invalid user input', (done) => {
 
         chai.request(app)
             .post('/api/v1/property')
@@ -114,7 +97,7 @@ describe('test properties', () => {
             })
     })
 
-    it('should test get all properties', (done) => {
+    it.skip('should test get all properties', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .get('/api/v1/property')
@@ -126,7 +109,7 @@ describe('test properties', () => {
             })
     })
 
-    it('should test get all properties when non exists', (done) => {
+    it.skip('should test get all properties when non exists', (done) => {
         chai.request(app)
             .get('/api/v1/property')
             .end((err, res) => {
@@ -138,7 +121,7 @@ describe('test properties', () => {
     })
 
 
-    it('should test get a non existing single properties', (done) => {
+    it.skip('should test get a non existing single properties', (done) => {
         chai.request(app)
             .get('/api/v1/property/9')
             .end((err, res) => {
@@ -150,7 +133,7 @@ describe('test properties', () => {
     })
 
 
-    it('delete property advert', (done) => {
+    it.skip('delete property advert', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .delete('/api/v1/property/2')
@@ -164,7 +147,7 @@ describe('test properties', () => {
 
     })
 
-    it('gets a single property advert', (done) => {
+    it.skip('gets a single property advert', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .get('/api/v1/property/2')
@@ -177,7 +160,7 @@ describe('test properties', () => {
 
     })
 
-    it('gets a single property by type', (done) => {
+    it.skip('gets a single property by type', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .get('/api/v1/property?type=two')
@@ -190,7 +173,7 @@ describe('test properties', () => {
 
     })
 
-    it('gets a single property by type ', (done) => {
+    it.skip('gets a single property by type ', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .get('/api/v1/property?type=car')
@@ -204,7 +187,7 @@ describe('test properties', () => {
     })
 
 
-    it('delete property non existing advert', (done) => {
+    it.skip('delete property non existing advert', (done) => {
 
         properties.push(utils.sample_property)
         chai.request(app)
@@ -219,7 +202,7 @@ describe('test properties', () => {
 
     })
 
-    it('delete property that you dont own advert', (done) => {
+    it.skip('delete property that you dont own advert', (done) => {
         properties.push(utils.sample_property1)
         chai.request(app)
             .delete('/api/v1/property/3')
@@ -232,7 +215,7 @@ describe('test properties', () => {
             })
 
     })
-    it('mark property advert as sold', (done) => {
+    it.skip('mark property advert as sold', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .patch('/api/v1/property/2/sold')
@@ -245,7 +228,7 @@ describe('test properties', () => {
             })
 
     })
-    it('mark property as sold non existing advert', (done) => {
+    it.skip('mark property as sold non existing advert', (done) => {
 
         properties.push(utils.sample_property)
         chai.request(app)
@@ -261,7 +244,7 @@ describe('test properties', () => {
 
     })
 
-    it('mark property as sold that you dont own advert', (done) => {
+    it.skip('mark property as sold that you dont own advert', (done) => {
         properties.push(utils.sample_property1)
         chai.request(app)
             .patch('/api/v1/property/3/sold')
@@ -275,7 +258,7 @@ describe('test properties', () => {
     })
 
 
-    it('update price', (done) => {
+    it.skip('update price', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .patch('/api/v1/property/2/price')
@@ -290,7 +273,7 @@ describe('test properties', () => {
             })
 
     })
-    it('update price with invalid input', (done) => {
+    it.skip('update price with invalid input', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .patch('/api/v1/property/2/price')
@@ -305,7 +288,7 @@ describe('test properties', () => {
 
     })
 
-    it('update price for a property you dont own', (done) => {
+    it.skip('update price for a property you dont own', (done) => {
         properties.push(utils.sample_property1)
         chai.request(app)
             .patch('/api/v1/property/3/price')
@@ -320,7 +303,7 @@ describe('test properties', () => {
 
     })
 
-    it('update price for non existing property', (done) => {
+    it.skip('update price for non existing property', (done) => {
         properties.push(utils.sample_property1)
         chai.request(app)
             .patch('/api/v1/property/9/price')
@@ -335,7 +318,7 @@ describe('test properties', () => {
 
     })
 
-    it('flag a property', (done) => {
+    it.skip('flag a property', (done) => {
         properties.push(utils.sample_property1)
         chai.request(app)
             .patch('/api/v1/property/3/flag')
@@ -350,7 +333,7 @@ describe('test properties', () => {
 
     })
 
-    it('flag a property with invalid details', (done) => {
+    it.skip('flag a property with invalid details', (done) => {
         properties.push(utils.sample_property1)
         chai.request(app)
             .patch('/api/v1/property/3/flag')
@@ -366,7 +349,7 @@ describe('test properties', () => {
     })
 
 
-    it('flag a non existing property', (done) => {
+    it.skip('flag a non existing property', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .patch('/api/v1/property/9/flag')
@@ -381,7 +364,7 @@ describe('test properties', () => {
 
     })
 
-    it('flag a property don\'t you own', (done) => {
+    it.skip('flag a property don\'t you own', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .patch('/api/v1/property/2/flag')
@@ -396,7 +379,7 @@ describe('test properties', () => {
 
     })
 
-    it('handle 405 error', (done) => {
+    it.skip('handle 405 error', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .patch('/api/v1/prope')
@@ -409,7 +392,7 @@ describe('test properties', () => {
             })
     })
 
-    it('handle get by non integer', (done) => {
+    it.skip('handle get by non integer', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
             .get('/api/v1/property/abc')

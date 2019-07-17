@@ -13,8 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
-app.use('/api/v1', authRoutes);
-app.use('/api/v1', propertyRoutes);
+app.use('/api/v2', authRoutes);
+app.use('/api/v2', propertyRoutes);
 
 // handle 405
 app.use(methodNotAllowed);
