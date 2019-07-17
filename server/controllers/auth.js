@@ -17,7 +17,7 @@ const userController = {
       const hashedPassword = hashPassword(password);
       const user1 = new User(firstname, lastname, email, hashedPassword, isAgent);
 
-      user1.save();
+      await user1.save();
       const data = {
         firstname: user1.firstname,
         lastname: user1.lastname,
@@ -49,10 +49,10 @@ const userController = {
       userResponse.setError(400, 'password is required');
       return userResponse.send(res);
     }
-    const user = User.getUserByEmail(email);
+    const user = await User.getUserByEmail(email);
     if (user) {
       if (compareHash(password, user.password)) {
-        const token = encodeToken(user);
+        const token = encodeToken(createPayload(user.firstname, user.email, user.isAgent, user.isAdmin));
         userResponse.setSuccess(200, 'logged in successfully', token);
         return userResponse.send(res);
       }

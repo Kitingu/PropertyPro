@@ -1,5 +1,4 @@
 require('dotenv');
-const uuidv4 = require('uuid/v4');
 const { db } = require('./db/db')
 const users = []
 
@@ -23,8 +22,12 @@ class User {
   static async getUserByEmail(email) {
     const query = `SELECT * from users where email = $1`
     const values = [email]
+
     const { rows } = await db.queryWithParams(query, values)
-    return rows[0]
+    if (rows) {
+      return rows[0]
+    }
+    return false
   }
 }
 

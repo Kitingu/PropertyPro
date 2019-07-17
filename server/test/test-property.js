@@ -6,25 +6,8 @@ const { properties } = require('../models/property')
 chai.use(chaiHttp)
 const { expect } = chai;
 
-let token
+
 describe('test properties', () => {
-
-    before((done) => {
-
-        chai.request(app)
-            .post('/api/v1/auth/signup')
-            .send(utils.user)
-            .end((err, res) => {
-                token = res.body.data.token
-                done()
-            })
-
-    })
-
-    afterEach((done) => {
-        properties.length = 0
-        done()
-    })
 
     it.skip('create property advert', (done) => {
 
