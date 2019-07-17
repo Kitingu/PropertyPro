@@ -11,10 +11,11 @@ const propertyController = {
     } = req.body;
 
     try {
-      const imgPath = await req.file.url;
+      const imgPath = req.file.url;
       const property = new Property(state, city, type,
         price, address, contact, imgPath, ownerEmail);
-      property.save();
+
+      await property.save();
       userResponse.setSuccess(201, 'property advert created successfully', property);
       return userResponse.send(res);
     } catch (error) {

@@ -2,7 +2,6 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const utils = require('./setup');
 const { app } = require('../app');
-const { users } = require('../models/user');
 chai.use(chaiHttp);
 const { expect } = chai;
 
