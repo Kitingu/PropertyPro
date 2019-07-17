@@ -77,10 +77,12 @@ const propertyController = {
   },
   async changeStatus(req, res) {
     const { id } = req.params;
-    const property = Property.getPropertybyId(parseInt(id));
+    const property = await Property.getPropertybyId(parseInt(id));
+
+
     if (property) {
       if (checkOwner(req, property)) {
-        Property.changePropertyStatus(property);
+        await Property.changePropertyStatus(property.propertyid);
         userResponse.setSuccess(200, 'property advert updated successfully', property);
         return userResponse.send(res);
       }

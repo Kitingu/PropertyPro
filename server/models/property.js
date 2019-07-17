@@ -28,7 +28,7 @@ class Property {
   static async getPropertybyId(id) {
     const query = `SELECT * from properties where propertyId = $1`
     const values = [id]
-    const { rows } =  await db.queryWithParams(query, values)
+    const { rows } = await db.queryWithParams(query, values)
     if (rows) {
       return rows[0]
     }
@@ -48,8 +48,10 @@ class Property {
     properties.splice(index, 1);
   }
 
-  static changePropertyStatus(property) {
-    property.status = 'sold';
+  static async changePropertyStatus(id) {
+    const query = `UPDATE properties SET status =$1  WHERE propertyid = $2`
+    const values = ['sold', id]
+    const { rows } = await db.queryWithParams(query, values)
   }
 
   static updatePrice(property, price) {

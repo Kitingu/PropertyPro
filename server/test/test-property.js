@@ -68,6 +68,48 @@ describe('test properties', () => {
 
     })
 
+    it('mark property advert as sold', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v2/property/1/sold')
+            .set('Authorization', `Bearer ${token}`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res.body.message).equals("property advert updated successfully");
+                expect(res).to.have.status(200)
+                done()
+            })
+
+    })
+
+    it('mark property as sold non existing advert', (done) => {
+
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v2/property/5/sold')
+            .set('Authorization', `Bearer ${token}`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res.body.error).equals("resource not found");
+
+                expect(res).to.have.status(404)
+                done()
+            })
+
+    })
+
+    it.skip('mark property as sold that you dont own advert', (done) => {
+        chai.request(app)
+            .patch('/api/v2/property/3/sold')
+            .set('Authorization', `Bearer ${token}`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(401)
+                done()
+            })
+
+    })
+
     it('create property without token', (done) => {
 
         chai.request(app)
@@ -231,47 +273,7 @@ describe('test properties', () => {
             })
 
     })
-    it.skip('mark property advert as sold', (done) => {
-        properties.push(utils.sample_property)
-        chai.request(app)
-            .patch('/api/v1/property/2/sold')
-            .set('Authorization', `Bearer ${token}`)
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res.body.message).equals("property advert updated successfully");
-                expect(res).to.have.status(200)
-                done()
-            })
 
-    })
-    it.skip('mark property as sold non existing advert', (done) => {
-
-        properties.push(utils.sample_property)
-        chai.request(app)
-            .patch('/api/v1/property/5/sold')
-            .set('Authorization', `Bearer ${token}`)
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res.body.error).equals("resource not found");
-
-                expect(res).to.have.status(404)
-                done()
-            })
-
-    })
-
-    it.skip('mark property as sold that you dont own advert', (done) => {
-        properties.push(utils.sample_property1)
-        chai.request(app)
-            .patch('/api/v1/property/3/sold')
-            .set('Authorization', `Bearer ${token}`)
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res).to.have.status(401)
-                done()
-            })
-
-    })
 
 
     it.skip('update price', (done) => {
