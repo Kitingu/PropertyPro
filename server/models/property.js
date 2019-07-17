@@ -1,5 +1,4 @@
-require('dotenv');
-const moment = require('moment');
+const { db } = require('./db/db')
 
 const properties = [];
 
@@ -42,8 +41,10 @@ class Property {
   }
 
 
-  static getAllProperties() {
-    return properties;
+  static async getAllProperties() {
+    const query = `SELECT * from properties`
+    const { rows } = await db.basicQuery(query)
+    return rows
   }
 
   static deleteProperty(id) {
