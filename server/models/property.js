@@ -33,6 +33,12 @@ class Property {
     return false
   }
 
+  static async checkDuplicates(address, city, price, ownerphonenumber) {
+    const query = `SELECT * FROM properties WHERE address = $1 AND city = $2 AND price = $3 AND ownerphonenumber = $4`
+    const values = [address, city, price, ownerphonenumber]
+    const { rows } = await db.queryWithParams(query, values)
+    return rows[0]
+  }
 
   static async getAllProperties() {
     const query = `SELECT * FROM properties`
@@ -53,19 +59,18 @@ class Property {
     return rows;
   }
 
-  static queryByType(type) {
-    return properties.filter(property => property.type === type.toLowerCase());
+  static async flagProperty(userEmail, propertyId, reason, description) {
+    const query = `INSERT INTO flags(user_email,property_id,reason,description) VALUES($1, $2, $3, $4) returning *`
+    const values = [userEmail, propertyId, reason, description]
+    const { rows } = await db.queryWithParams(query, values)
+    return rows[0]
   }
 
-  static flagProperty(userId, property, reason, description) {
-    const flag = {
-      userId,
-      propertyId: property.propertyId,
-      timeCreated: moment().format('MMMM Do YYYY, h:mm:ss a'),
-      reason,
-      description,
-    };
-    property.flags.push(flag);
+  static async getFlags(id) {
+    const query = `SELECT * FROM flags WHERE flag_id = $1 `
+    const values = [id]
+    const { rows } = await db.queryWithParams(query, values)
+    return rows
   }
 }
 

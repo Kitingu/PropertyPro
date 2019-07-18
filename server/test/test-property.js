@@ -335,7 +335,7 @@ describe('test properties', () => {
     it.skip('flag a property with invalid details', (done) => {
         properties.push(utils.sample_property1)
         chai.request(app)
-            .patch('/api/v1/property/3/flag')
+            .patch('/api/v2/property/1/flag')
             .set('Authorization', `Bearer ${token}`)
             .send(utils.invalidFlag)
             .end((err, res) => {
@@ -389,32 +389,5 @@ describe('test properties', () => {
                 done()
             })
 
-    })
-
-    it('handle 405 error', (done) => {
-        properties.push(utils.sample_property)
-        chai.request(app)
-            .patch('/api/v2/prope')
-            .send(utils.flag)
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res.body.error).equals("This method is not allowed")
-                expect(res).to.have.status(405)
-                done()
-            })
-    })
-
-    it('handle get by non integer', (done) => {
-        properties.push(utils.sample_property)
-        chai.request(app)
-            .get('/api/v2/property/abc')
-            .send(utils.flag)
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res.body.error).equals("property id should only be a number")
-                expect(res).to.have.status(400)
-
-                done()
-            })
     })
 })
