@@ -4,7 +4,6 @@ const properties = [];
 
 class Property {
   constructor(state, city, type, price, address, contact, image_url, ownerEmail) {
-    this.propertyId = (properties.length) + 1;
     this.status = 'available';
     this.state = state;
     this.city = city;
@@ -26,7 +25,7 @@ class Property {
   }
 
   static async getPropertybyId(id) {
-    const query = `SELECT * from properties where propertyId = $1`
+    const query = `SELECT * FROM properties WHERE propertyId = $1`
     const values = [id]
     const { rows } = await db.queryWithParams(query, values)
     if (rows) {
@@ -37,19 +36,18 @@ class Property {
 
 
   static async getAllProperties() {
-    const query = `SELECT * from properties`
+    const query = `SELECT * FROM properties`
     const { rows } = await db.basicQuery(query)
     return rows
   }
 
-  static deleteProperty(id) {
-    const property = this.getPropertybyId(id);
-    const index = properties.indexOf(property);
-    properties.splice(index, 1);
+  static async deleteProperty(id) {
+    const query = `DELETE FROM properties WHERE propertyid = $1`
+    const values = [id]
+    const { rows } = await db.queryWithParams(query, values)
   }
 
   static async update(field, id, value) {
-    const property = this.payload;
     const sql = `UPDATE properties SET ${field} = $1 WHERE propertyid = $2 RETURNING *`;
     const values = [value, id]
     const { rows } = await db.queryWithParams(sql, values);

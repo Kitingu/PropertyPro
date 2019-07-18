@@ -12,10 +12,10 @@ const propertyController = {
 
     try {
       const imgPath = req.file.url;
-      const property = new Property(state, city, type,
+      let property = new Property(state, city, type,
         price, address, contact, imgPath, ownerEmail);
 
-      await property.save();
+      property = await property.save();
       userResponse.setSuccess(201, 'property advert created successfully', property);
       return userResponse.send(res);
     } catch (error) {
@@ -59,13 +59,15 @@ const propertyController = {
   },
   async deleteProperty(req, res) {
     const { id } = req.params;
-    const property = Property.getPropertybyId(parseInt(id));
+    const property = await Property.getPropertybyId(parseInt(id));
     if (property) {
-      const owner = req.user.email;
-      if (owner === property.owner) {
-        Property.deleteProperty(id);
-        userResponse.setSuccess(200, 'advert deleted successfully', null);
+
+      if (checkOwner(req, property)) {
+
+        await Property.deleteProperty(id);
+        userResponse.setSuccess(200, 'advert deleted successfully');
         userResponse.send(res);
+
       } else {
         userResponse.setError(401, 'you dont have the privilege to perform this task');
         return userResponse.send(res);
