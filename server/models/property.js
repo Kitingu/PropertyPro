@@ -24,8 +24,8 @@ class Property {
     return rows[0]
   }
 
-  static async getPropertybyId(id) {
-    const query = `SELECT * FROM properties WHERE propertyId = $1`
+  static async getPropertyByField(field, id) {
+    const query = `SELECT * FROM properties WHERE ${field} = $1`
     const values = [id]
     const { rows } = await db.queryWithParams(query, values)
     if (rows) {

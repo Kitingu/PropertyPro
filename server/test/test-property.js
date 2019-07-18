@@ -234,10 +234,10 @@ describe('test properties', () => {
             })
     })
 
-    it.skip('should test get all properties', (done) => {
+    it('should test get all properties', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
-            .get('/api/v1/property')
+            .get('/api/v2/property')
             .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(200)
@@ -260,10 +260,10 @@ describe('test properties', () => {
             })
     })
 
-    it.skip('gets a single property by type', (done) => {
+    it('gets a single property by type', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
-            .get('/api/v1/property?type=two')
+            .get('/api/v2/property?type=miniflat')
             .end((err, res) => {
                 if (err) done(err);
                 expect(res.body.message).equals("properties fetched successfully")
@@ -273,10 +273,10 @@ describe('test properties', () => {
 
     })
 
-    it.skip('gets a single property by type ', (done) => {
+    it('gets a single property by type ', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
-            .get('/api/v1/property?type=car')
+            .get('/api/v2/property?type=car')
             .end((err, res) => {
                 if (err) done(err);
                 expect(res.body.error).equals("couldnt find anything that matches the filters")
