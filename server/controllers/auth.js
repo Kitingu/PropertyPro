@@ -10,23 +10,24 @@ const userController = {
 
   async signUp(req, res) {
     const {
-      firstname, lastname, email, password, isAgent,
+      firstname, lastname, email, password, phoneNumber, isAgent,
     } = req.body;
     const user = await User.getUserByEmail(email);
     if (!user) {
       const hashedPassword = hashPassword(password);
-      const user1 = new User(firstname, lastname, email, hashedPassword, isAgent);
+      const user1 = new User(firstname, lastname, email, hashedPassword, phoneNumber, isAgent);
 
       await user1.save();
       const data = {
         firstname: user1.firstname,
         lastname: user1.lastname,
         email: user1.email,
+        phoneNumber: phoneNumber,
         isAgent: user1.isAgent,
         isAdmin: user1.isAdmin,
       };
       const token = encodeToken(
-        createPayload(user1.firstname, user1.email, user1.isAgent, user1.isAdmin),
+        createPayload(user1.phoneNumber, user1.email, user1.isAgent, user1.isAdmin),
       );
       data.token = token;
       userResponse.setSuccess(201, 'User registered successfully', data);

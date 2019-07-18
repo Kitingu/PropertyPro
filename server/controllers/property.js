@@ -7,13 +7,15 @@ const propertyController = {
   async createProperty(req, res) {
     const ownerEmail = req.user.email;
     const {
-      state, city, type, price, address, contact,
+      state, city, type, price, address
     } = req.body;
+
+    const ownerPhoneNumber = req.user.phonenumber
 
     try {
       const imgPath = req.file.url;
       let property = new Property(state, city, type,
-        price, address, contact, imgPath, ownerEmail);
+        price, address, ownerPhoneNumber, imgPath, ownerEmail);
 
       property = await property.save();
       userResponse.setSuccess(201, 'property advert created successfully', property);

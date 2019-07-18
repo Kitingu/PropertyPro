@@ -45,6 +45,10 @@ class Validate {
           .label('last name should have at least three alphabetic characters'),
         email: joi.string().regex(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).required().error(onError)
           .label('please provide a valid email'),
+        phoneNumber: joi.string().regex(/^[a-zA-Z0-9]+$/).min(10).max(13)
+          .required()
+          .error(onError)
+          .label('please provide a valid phone number'),
         password: joi.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,128}$/)
           .required().error(onError)
           .label('password should have at least 6 characters, a uppercase,lowercase a number and a special character'),
@@ -77,11 +81,7 @@ class Validate {
       address: joi.string().regex(/^[0-9]+$/).min(3).max(128)
         .required()
         .error(onError)
-        .label('address should have at least three alphabetic or numeric characters'),
-      contact: joi.string().regex(/^[a-zA-Z0-9]+$/).min(10).max(13)
-        .required()
-        .error(onError)
-        .label('please provide a valid phone number'),
+        .label('address should have at least three alphabetic or numeric characters')
     })
     validator(req, res, schema, next);
   }
