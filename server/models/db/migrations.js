@@ -24,7 +24,7 @@ const migrations = async () => {
         state VARCHAR (255)  NOT NULL,
         city VARCHAR (20) NOT NULL,
         type VARCHAR (255) NOT NULL,
-        price VARCHAR (255) NOT NULL,
+        price FLOAT  NOT NULL,
         address VARCHAR (255) NOT NULL,
         contact VARCHAR (255) NOT NULL,
         image_url VARCHAR (255),
@@ -36,7 +36,7 @@ const migrations = async () => {
   CREATE TABLE IF NOT EXISTS
     flags(
         flag_id serial PRIMARY KEY,
-        user_email integer REFERENCES users(user_id) ON DELETE CASCADE,
+        user_email VARCHAR REFERENCES users(email) ON DELETE CASCADE,
         property_id integer REFERENCES properties(propertyId) ON DELETE CASCADE,
         reason VARCHAR (50) UNIQUE NOT NULL,
         description VARCHAR (300) NOT NULL,
@@ -45,7 +45,7 @@ const migrations = async () => {
 
   CREATE TABLE IF NOT EXISTS
     images(
-        image_url integer REFERENCES users(user_id) ON DELETE CASCADE,
+        image_url VARCHAR (255) NOT NULL,
         property_id integer REFERENCES properties(propertyId) ON DELETE CASCADE,
         added_on TIMESTAMP NOT NULL DEFAULT NOW()
           );`;

@@ -67,6 +67,65 @@ describe('test properties', () => {
             })
 
     })
+    it('update price', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v2/property/1/price')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.newPrice)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res.body.message).equals("Property updated successfully");
+
+                expect(res).to.have.status(200)
+                done()
+            })
+
+    })
+    it('update price with invalid input', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v2/property/2/price')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.invalidPrice)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res.body.error).equals("price should only include numbers greater than 0");
+                expect(res).to.have.status(400)
+                done()
+            })
+
+    })
+
+    it.skip('update price for a property you dont own', (done) => {
+        properties.push(utils.sample_property1)
+        chai.request(app)
+            .patch('/api/v2/property/3/price')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.newPrice)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res.body.error).equals("you dont have the privilege to perform this task")
+                expect(res).to.have.status(401)
+                done()
+            })
+
+    })
+
+    it('update price for non existing property', (done) => {
+        properties.push(utils.sample_property1)
+        chai.request(app)
+            .patch('/api/v2/property/9/price')
+            .set('Authorization', `Bearer ${token}`)
+            .send(utils.newPrice)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res.body.error).equals("A property with id 9 does not exist");
+                expect(res).to.have.status(404)
+                done()
+            })
+
+    })
 
     it('mark property advert as sold', (done) => {
         properties.push(utils.sample_property)
@@ -90,7 +149,7 @@ describe('test properties', () => {
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 if (err) done(err);
-                expect(res.body.error).equals("resource not found");
+                expect(res.body.error).equals("A property with id 5 does not exist");
 
                 expect(res).to.have.status(404)
                 done()
@@ -274,67 +333,6 @@ describe('test properties', () => {
 
     })
 
-
-
-    it.skip('update price', (done) => {
-        properties.push(utils.sample_property)
-        chai.request(app)
-            .patch('/api/v1/property/2/price')
-            .set('Authorization', `Bearer ${token}`)
-            .send(utils.newPrice)
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res.body.message).equals("Property updated successfully");
-
-                expect(res).to.have.status(200)
-                done()
-            })
-
-    })
-    it.skip('update price with invalid input', (done) => {
-        properties.push(utils.sample_property)
-        chai.request(app)
-            .patch('/api/v1/property/2/price')
-            .set('Authorization', `Bearer ${token}`)
-            .send(utils.invalidPrice)
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res.body.error).equals("price should only include numbers greater than 0");
-                expect(res).to.have.status(400)
-                done()
-            })
-
-    })
-
-    it.skip('update price for a property you dont own', (done) => {
-        properties.push(utils.sample_property1)
-        chai.request(app)
-            .patch('/api/v1/property/3/price')
-            .set('Authorization', `Bearer ${token}`)
-            .send(utils.newPrice)
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res.body.error).equals("you dont have the privilege to perform this task")
-                expect(res).to.have.status(401)
-                done()
-            })
-
-    })
-
-    it.skip('update price for non existing property', (done) => {
-        properties.push(utils.sample_property1)
-        chai.request(app)
-            .patch('/api/v1/property/9/price')
-            .set('Authorization', `Bearer ${token}`)
-            .send(utils.newPrice)
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res.body.error).equals("A property with id 9 does not exist");
-                expect(res).to.have.status(404)
-                done()
-            })
-
-    })
 
     it.skip('flag a property', (done) => {
         properties.push(utils.sample_property1)

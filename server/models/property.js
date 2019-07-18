@@ -48,14 +48,12 @@ class Property {
     properties.splice(index, 1);
   }
 
-  static async changePropertyStatus(id) {
-    const query = `UPDATE properties SET status =$1  WHERE propertyid = $2`
-    const values = ['sold', id]
-    const { rows } = await db.queryWithParams(query, values)
-  }
-
-  static updatePrice(property, price) {
-    property.price = price;
+  static async update(field, id, value) {
+    const property = this.payload;
+    const sql = `UPDATE properties SET ${field} = $1 WHERE propertyid = $2 RETURNING *`;
+    const values = [value, id]
+    const { rows } = await db.queryWithParams(sql, values);
+    return rows;
   }
 
   static queryByType(type) {
