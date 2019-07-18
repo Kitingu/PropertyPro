@@ -77,12 +77,12 @@ const propertyController = {
   },
   async changeStatus(req, res) {
     const { id } = req.params;
-    const property = await Property.getPropertybyId(parseInt(id));
+    let property = await Property.getPropertybyId(parseInt(id));
 
 
     if (property) {
       if (checkOwner(req, property)) {
-        await Property.changePropertyStatus(property.propertyid);
+        property = await Property.update('status', property.propertyid, 'sold');
         userResponse.setSuccess(200, 'property advert updated successfully', property);
         return userResponse.send(res);
       }
@@ -91,20 +91,17 @@ const propertyController = {
       return userResponse.send(res);
     }
 
-    res.status(404).send({
-      status: 'failed',
-      error: 'resource not found',
-      description: `A property with id ${id} does not exist`,
-
-    });
+    userResponse.setError(404, `A property with id ${id} does not exist`);
+    return userResponse.send(res);
   },
   async updatePrice(req, res) {
     const { id } = req.params;
-    const property = Property.getPropertybyId(parseInt(id));
+    let property = await Property.getPropertybyId(parseInt(id));
     const { price } = req.body;
+
     if (property) {
       if (checkOwner(req, property)) {
-        Property.updatePrice(property, price);
+        property = await Property.update('price', id, price);
         userResponse.setSuccess('200', 'Property updated successfully', property);
         return userResponse.send(res);
       }

@@ -55,7 +55,7 @@ const utils = {
     flags: [],
   },
   newPrice: {
-    price: 120484848,
+    price: 12048,
   },
   invalidPrice: {
     price: 'sdfghjk',
