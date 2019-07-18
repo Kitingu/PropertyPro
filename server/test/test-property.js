@@ -260,23 +260,6 @@ describe('test properties', () => {
             })
     })
 
-
-    it.skip('delete property advert', (done) => {
-        properties.push(utils.sample_property)
-        chai.request(app)
-            .delete('/api/v1/property/2')
-            .set('Authorization', `Bearer ${token}`)
-            .end((err, res) => {
-                if (err) done(err);
-                expect(res).to.have.status(200)
-                expect(res.body.message).equals("advert deleted successfully");
-                done()
-            })
-
-    })
-
-
-
     it.skip('gets a single property by type', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
@@ -304,11 +287,11 @@ describe('test properties', () => {
     })
 
 
-    it.skip('delete property non existing advert', (done) => {
+    it('delete property non existing advert', (done) => {
 
         properties.push(utils.sample_property)
         chai.request(app)
-            .delete('/api/v1/property/5')
+            .delete('/api/v2/property/5')
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 if (err) done(err);
@@ -394,11 +377,24 @@ describe('test properties', () => {
             })
 
     })
-
-    it.skip('handle 405 error', (done) => {
+    it('delete property advert', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
-            .patch('/api/v1/prope')
+            .delete('/api/v2/property/1')
+            .set('Authorization', `Bearer ${token}`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res).to.have.status(200)
+                expect(res.body.message).equals("advert deleted successfully");
+                done()
+            })
+
+    })
+
+    it('handle 405 error', (done) => {
+        properties.push(utils.sample_property)
+        chai.request(app)
+            .patch('/api/v2/prope')
             .send(utils.flag)
             .end((err, res) => {
                 if (err) done(err);
@@ -408,10 +404,10 @@ describe('test properties', () => {
             })
     })
 
-    it.skip('handle get by non integer', (done) => {
+    it('handle get by non integer', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
-            .get('/api/v1/property/abc')
+            .get('/api/v2/property/abc')
             .send(utils.flag)
             .end((err, res) => {
                 if (err) done(err);
