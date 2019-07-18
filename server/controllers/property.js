@@ -26,12 +26,14 @@ const propertyController = {
 
   async getAll(req, res) {
     const allProperties = await Property.getAllProperties();
-
+    const types = ['two bedroom', 'three bedroom', 'bedsitter', 'mini-flat']
     const { type } = req.query;
-    if (type) {
-      const results = Property.queryByType(type);
 
-      if (results.length) {
+    if (type) {
+
+      const results = await Property.getPropertyByField('type', type);
+
+      if (results) {
         userResponse.setSuccess(200, 'properties fetched successfully', results);
         return userResponse.send(res);
       }
@@ -48,7 +50,7 @@ const propertyController = {
   },
   async getSpecificAdvert(req, res) {
     const { id } = req.params;
-    const property = await Property.getPropertybyId(parseInt(id));
+    const property = await Property.getPropertyByField('propertyid', parseInt(id));
     if (property) {
       userResponse.setSuccess(200, 'property advert fetched successfully', property);
       return userResponse.send(res);
@@ -59,7 +61,7 @@ const propertyController = {
   },
   async deleteProperty(req, res) {
     const { id } = req.params;
-    const property = await Property.getPropertybyId(parseInt(id));
+    const property = await Property.getPropertyByField('propertyid', parseInt(id));
     if (property) {
 
       if (checkOwner(req, property)) {
@@ -79,7 +81,7 @@ const propertyController = {
   },
   async changeStatus(req, res) {
     const { id } = req.params;
-    let property = await Property.getPropertybyId(parseInt(id));
+    let property = await Property.getPropertyByField('propertyid', parseInt(id));
 
 
     if (property) {
@@ -98,7 +100,7 @@ const propertyController = {
   },
   async updatePrice(req, res) {
     const { id } = req.params;
-    let property = await Property.getPropertybyId(parseInt(id));
+    let property = await Property.getPropertyByField('propertyid', parseInt(id));
     const { price } = req.body;
 
     if (property) {
@@ -117,7 +119,7 @@ const propertyController = {
   },
   async flagProperty(req, res) {
     const { id } = req.params;
-    const property = Property.getPropertybyId(parseInt(id));
+    const property = Property.getPropertyByField('propertyid', parseInt(id));
     const { reason, description } = req.body;
 
     if (property) {
