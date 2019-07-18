@@ -45,7 +45,7 @@ describe('test properties', () => {
             .field('city', 'Nairobi')
             .field('price', '4000000000')
             .field('address', 122649)
-            .field('contact', 07153578331)
+
 
             .end((err, res) => {
                 if (err) done(err);
@@ -180,7 +180,7 @@ describe('test properties', () => {
             .field('city', 'Nairobi')
             .field('price', '4000000000')
             .field('address', 122649)
-            .field('contact', 07153578331)
+
 
             .end((err, res) => {
                 if (err) done(err);
@@ -201,7 +201,7 @@ describe('test properties', () => {
             .field('city', 'Nairobi')
             .field('price', '4000000000')
             .field('address', 122649)
-            .field('contact', 07153578331)
+
 
             .end((err, res) => {
                 if (err) done(err);
@@ -223,7 +223,7 @@ describe('test properties', () => {
             .field('city', 'h1232......')
             .field('price', '4000000000')
             .field('address', 122649)
-            .field('contact', 07153578331)
+
 
             .end((err, res) => {
                 if (err) done(err);

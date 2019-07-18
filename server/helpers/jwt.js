@@ -3,8 +3,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 const jwt = require('jsonwebtoken');
 
-const createPayload = (firstname, email, isAgent, isAdmin) => ({
-  firstname,
+const createPayload = (phoneNumber, email, isAgent, isAdmin) => ({
+  phoneNumber,
   email,
   isAgent,
   isAdmin,

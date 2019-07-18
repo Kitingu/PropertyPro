@@ -4,6 +4,7 @@ const utils = {
     lastname: 'gathee',
     email: 'asdf@gmail.com',
     password: 'asdQ@123',
+    phoneNumber: '4949494921',
     isAgent: true,
   },
   user1: {
@@ -11,6 +12,7 @@ const utils = {
     lastname: 'mandela',
     email: 'nelson@gmail.com',
     password: 'asdQ@123',
+    phoneNumber: '4949494921',
     isAgent: true,
   },
   user2: {
@@ -18,6 +20,7 @@ const utils = {
     lastname: 'asdf',
     email: 'admin@gmail.com',
     password: 'asdQ@123',
+    phoneNumber:'0715357896',
     isAgent: true,
   },
   userLogin1: {
@@ -29,7 +32,7 @@ const utils = {
     password: 'asdQ@123',
   },
   sample_property: {
-    propertyId: 2,
+
     status: 'goog',
     state: 'kenya',
     city: 'nairobi',
@@ -37,9 +40,7 @@ const utils = {
     price: '40000',
     address: '3943',
     image_url: 'http://res.cloudinary.com/benlegendj/image/upload/v1561843898/property/iuaqakp4nrm8tzccsddo.png',
-    contact: '4949494921',
-    owner: 'asdf@gmail.com',
-    flags: [],
+    owner: 'asdf@gmail.com'
   },
   sample_property1: {
     propertyId: 3,
@@ -50,9 +51,7 @@ const utils = {
     price: '40000',
     address: '3943',
     image_url: 'http://res.cloudinary.com/benlegendj/image/upload/v1561843898/property/iuaqakp4nrm8tzccsddo.png',
-    contact: '4949494921',
     owner: 'benlegendj@gmail.com',
-    flags: [],
   },
   newPrice: {
     price: 12048,
