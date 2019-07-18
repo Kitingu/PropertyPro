@@ -23,6 +23,8 @@ describe('test server', () => {
       .send(utils.user)
       .end((err, res) => {
         if (err) done(err);
+        console.log((res.body));
+
         expect(res).to.have.status(201);
         expect(res.body.message).equals('User registered successfully');
         done();
