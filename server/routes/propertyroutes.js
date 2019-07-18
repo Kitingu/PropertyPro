@@ -7,11 +7,11 @@ const upload = require('../middlewares/upload');
 const { checkIdType, handlers } = require('../middlewares/error-handler');
 const { verifyToken } = require('../middlewares/jwt').jwtHelper;
 const Validate = require('../middlewares/validators')
-
+const checkDuplicates = require('../middlewares/check-duplicates')
 const { methodNotAllowed } = handlers;
 
 router.route('/property')
-  .post(verifyToken, upload, Validate.property, checkAgent, propertyController.createProperty)
+  .post(verifyToken, upload, Validate.property, checkAgent, checkDuplicates, propertyController.createProperty)
   .get(propertyController.getAll)
   .all(methodNotAllowed);
 
@@ -21,7 +21,7 @@ router.route('/property/:id')
   .all(methodNotAllowed);
 
 router.route('/property/:id/price')
-  .patch(checkIdType, verifyToken,checkAgent, Validate.priceUpdate , propertyController.updatePrice)
+  .patch(checkIdType, verifyToken, checkAgent, Validate.priceUpdate, propertyController.updatePrice)
   .all(methodNotAllowed);
 
 router.route('/property/:id/sold')

@@ -33,6 +33,12 @@ class Property {
     return false
   }
 
+  static async checkDuplicates(address, city, price, ownerphonenumber) {
+    const query = `SELECT * FROM properties WHERE address = $1 AND city = $2 AND price = $3 AND ownerphonenumber = $4`
+    const values = [address, city, price, ownerphonenumber]
+    const { rows } = await db.queryWithParams(query, values)
+    return rows[0]
+  }
 
   static async getAllProperties() {
     const query = `SELECT * FROM properties`
