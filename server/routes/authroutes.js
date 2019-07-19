@@ -7,8 +7,8 @@ const Validate = require('../middlewares/validators')
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../../docs/swagger.json')
 
-router.use('/', swaggerUi.serve);
-router.get('/', swaggerUi.setup(swaggerDocument));
+router.use('/docs', swaggerUi.serve);
+router.get('/docs', swaggerUi.setup(swaggerDocument));
 
 
 router.post('/auth/signup', Validate.user, userController.signUp);

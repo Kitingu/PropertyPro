@@ -363,10 +363,10 @@ describe('test properties', () => {
 
     })
 
-    it.skip('flag a property don\'t you own', (done) => {
+    it('flag a property that you own', (done) => {
         properties.push(utils.sample_property)
         chai.request(app)
-            .patch('/api/v1/property/2/flag')
+            .patch('/api/v2/property/1/flag')
             .set('Authorization', `Bearer ${token}`)
             .send(utils.flag)
             .end((err, res) => {
