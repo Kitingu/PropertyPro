@@ -35,10 +35,15 @@ table th, table td {
     cursor: pointer;
     opacity: 0.9;
 }
-.sign:hover{
+
+.sign:hover {
     background: #3F4351;
 }
 
+img {
+    height: 40px;
+    width: 40px;
+}
 
 .select {
     background-color: #e0e2db;
@@ -54,7 +59,8 @@ table th {
     text-transform: uppercase;
     margin: 2px;
 }
-table #tb-checkbox{
+
+table #tb-checkbox {
     clear: both;
     position: relative;
     padding: 15px;
