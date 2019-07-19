@@ -13,7 +13,7 @@ const utils = {
     email: 'nelson@gmail.com',
     password: 'asdQ@123',
     phoneNumber: '4949494921',
-    isAgent: true,
+    isAgent: false,
   },
   user2: {
     firstname: 'charles',

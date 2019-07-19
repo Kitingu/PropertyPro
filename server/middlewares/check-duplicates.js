@@ -11,7 +11,7 @@ const checkDuplicates = async (req, res, next) => {
     const properties = await Property.checkDuplicates(address, city, price,phonenumber)
 
     if (properties) {
-        userResponse.setError(403, 'Duplicate properties are not allowed');
+        userResponse.setError(409, 'Duplicate properties are not allowed');
         return userResponse.send(res);
     }
 

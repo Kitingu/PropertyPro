@@ -121,7 +121,7 @@ const propertyController = {
   },
   async flagProperty(req, res) {
     const { id } = req.params;
-    const property = Property.getPropertyByField('propertyid', parseInt(id));
+    const property = await Property.getPropertyByField('propertyid', parseInt(id));
     const { reason, description } = req.body;
 
     if (property) {
@@ -130,13 +130,28 @@ const propertyController = {
         return userResponse.send(res);
       }
 
-      const owner = req.user.userId;
-      Property.flagProperty(owner, property, reason, description);
-      userResponse.setSuccess('200', 'Property flagged successfully', null);
+      const owner = req.user.email;
+
+      await Property.flagProperty(owner, id, reason, description);
+      userResponse.setSuccess('200', 'Property flagged successfully');
       return userResponse.send(res);
     }
-    userResponse.setError('404', 'property does not exist');
-    return userResponse.send(res);
   },
+  async getFlags(req, res) {
+    const { id } = req.params
+    const property = await Property.getPropertyByField('propertyid', parseInt(id));
+    if (property) {
+      const flags = await Property.getFlags(id)
+      if (flags) {
+        userResponse.setSuccess('200', 'Available flags', flags);
+        return userResponse.send(res)
+      }
+      userResponse.setSuccess('404', 'property not flagged yet');
+      return userResponse.send(res)
+    }
+    userResponse.setError('404', `A property with id ${id} does not exist`);
+    return userResponse.send(res);
+
+  }
 };
 module.exports = propertyController;

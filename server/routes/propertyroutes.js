@@ -30,6 +30,7 @@ router.route('/property/:id/sold')
 
 router.route('/property/:id/flag')
   .patch(checkIdType, verifyToken, Validate.flag, propertyController.flagProperty)
+  .get(propertyController.getFlags)
   .all(methodNotAllowed);
 
 module.exports = router;

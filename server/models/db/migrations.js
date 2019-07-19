@@ -17,6 +17,7 @@ const migrations = async () => {
         isAdmin BOOL DEFAULT 'false',
         created_on TIMESTAMP NOT NULL DEFAULT NOW()
     );
+    
 
   CREATE TABLE IF NOT EXISTS
     properties(
@@ -38,8 +39,8 @@ const migrations = async () => {
     flags(
         flag_id serial PRIMARY KEY,
         user_email VARCHAR REFERENCES users(email) ON DELETE CASCADE,
-        property_id integer REFERENCES properties(propertyId) ON DELETE CASCADE,
-        reason VARCHAR (50) UNIQUE NOT NULL,
+        property_id INTEGER REFERENCES properties(propertyid) ON DELETE CASCADE,
+        reason VARCHAR (50) NOT NULL,
         description VARCHAR (300) NOT NULL,
         created_on TIMESTAMP NOT NULL DEFAULT NOW()
         );
@@ -47,7 +48,7 @@ const migrations = async () => {
   CREATE TABLE IF NOT EXISTS
     images(
         image_url VARCHAR (255) NOT NULL,
-        property_id integer REFERENCES properties(propertyId) ON DELETE CASCADE,
+        property_id INTEGER REFERENCES properties(propertyid) ON DELETE CASCADE,
         added_on TIMESTAMP NOT NULL DEFAULT NOW()
           );`;
 
