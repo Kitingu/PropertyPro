@@ -88,8 +88,10 @@ class Validate {
 
   static priceUpdate(req, res, next) {
     const schema = joi.object().keys({
-      price: joi.number().min(1).required().error(onError)
-        .label('price should only include numbers greater than 0'),
+      price: joi.string().regex(/^[0-9]+$/).min(3).max(128)
+        .required()
+        .error(onError)
+        .label('price should only include numbers'),
     })
     validator(req, res, schema, next);
   }

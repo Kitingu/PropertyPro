@@ -90,7 +90,7 @@ describe('test properties', () => {
             .send(utils.invalidPrice)
             .end((err, res) => {
                 if (err) done(err);
-                expect(res.body.error).equals("price should only include numbers greater than 0");
+                expect(res.body.error).equals("price should only include numbers");
                 expect(res).to.have.status(400)
                 done()
             })

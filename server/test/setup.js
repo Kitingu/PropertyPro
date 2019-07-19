@@ -54,7 +54,7 @@ const utils = {
     owner: 'benlegendj@gmail.com',
   },
   newPrice: {
-    price: 12048,
+    price: "12048",
   },
   invalidPrice: {
     price: 'sdfghjk',

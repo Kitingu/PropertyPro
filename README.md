@@ -41,20 +41,36 @@ intervention location.
 | GET          | `/property/<:property-id>/flag`      |Get all flags of a given property|
 
 
-#### How to run the application locally
 
-1. Create a local working space (Folder)
-2. Open teminal and navigate to the folder reated above.
-3. git clone https://github.com/kitingu/propertypro.git
-4. Run `npm install` to install dependencies.
-5. Run `npm run devstart` to run the application.
-6. Open `Postman` to test the endpoints above.
+## Install and run the application:
+First ensure that you have Nodejs and npm installed in your computer
+
+1. Clone this repository and get to the project directory
+```bash
+    git clone https://github.com/kitingu/propertypro.git
+    cd propertyPro
+    git checkout develop
+```
+2. Install the project dependencies
+ ```bash
+    npm install
+```
+4. Run the application:
+ ```bash
+    npm run dev
+```
+
+
+## Test the application:
+```bash
+    npm run test
+```
 
 
 
 #### Where to get the User interface
 
-Navigate to https://kitingu.github.io/propertypro/index.html to view the pages
+Navigate to https://kitingu.github.io/PropertyPro/index.html to view the pages
 
 #### Documentation: [Heroku](https://propertypro-v2.herokuapp.com/api/v2)
 
