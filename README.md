@@ -38,25 +38,25 @@ intervention location.
 | PATCH          | `/property/<:property-id>/sold`       |Mark an advert as sold|
 | GET  |`/api/v1/property?type=property-type` |get all available property adverts of specific type|
 | POST          | `/property/<:property-id>/flag`      |Flag an advert as fraudulent|
-
+| GET          | `/property/<:property-id>/flag`      |Get all flags of a given property|
 
 
 #### How to run the application locally
 
->1. Create a local working space (Folder)
->2. Open teminal and navigate to the folder reated above.
->3. git clone https://github.com/kitingu/propertypro.git
->4. Run `npm install` to install dependencies.
->5. Run `npm run devstart` to run the application.
->6. Open `Postman` to test the endpoints above.
+1. Create a local working space (Folder)
+2. Open teminal and navigate to the folder reated above.
+3. git clone https://github.com/kitingu/propertypro.git
+4. Run `npm install` to install dependencies.
+5. Run `npm run devstart` to run the application.
+6. Open `Postman` to test the endpoints above.
 
 
 
 #### Where to get the User interface
 
-Navigate to https://kitingu.github.io/propertypro/UI/index.html to view the pages
+Navigate to https://kitingu.github.io/propertypro/index.html to view the pages
 
-#### Documentation: [Heroku](https://propertypro-v1.herokuapp.com/api/v1/)
+#### Documentation: [Heroku](https://propertypro-v2.herokuapp.com/api/v2)
 
 #### Author: Benedict Mwendwa
 

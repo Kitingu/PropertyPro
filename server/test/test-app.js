@@ -6,9 +6,21 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('test server', () => {
-    it('handle 405 error', (done) => {
+    it('handle 404 error', (done) => {
         chai.request(app)
             .patch('/api/v2/prope')
+            .send(utils.flag)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res.body.error).equals("Resource not found")
+                expect(res).to.have.status(404)
+                done()
+            })
+    })
+
+    it('handle 405 error', (done) => {
+        chai.request(app)
+            .put('/api/v2/property')
             .send(utils.flag)
             .end((err, res) => {
                 if (err) done(err);
@@ -30,5 +42,7 @@ describe('test server', () => {
                 done()
             })
     })
-    
+
+
+
 })

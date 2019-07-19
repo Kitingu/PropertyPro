@@ -88,6 +88,10 @@ const propertyController = {
 
     if (property) {
       if (checkOwner(req, property)) {
+        if (property.status == 'sold') {
+          userResponse.setError(400, 'property is already sold');
+          return userResponse.send(res);
+        }
         property = await Property.update('status', property.propertyid, 'sold');
         userResponse.setSuccess(200, 'property advert updated successfully', property);
         return userResponse.send(res);
@@ -106,6 +110,10 @@ const propertyController = {
     const { price } = req.body;
 
     if (property) {
+      if (price == property.price) {
+        userResponse.setError(400, 'No changes were made');
+        return userResponse.send(res);
+      }
       if (checkOwner(req, property)) {
         property = await Property.update('price', id, price);
         userResponse.setSuccess('200', 'Property updated successfully', property);

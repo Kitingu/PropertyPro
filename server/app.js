@@ -16,12 +16,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api/v2', authRoutes);
 app.use('/api/v2', propertyRoutes);
 
-// handle 405
-app.use(methodNotAllowed);
 
 
 // handle 404 error
 app.use(handle404);
+
+// handle 405
+app.use(methodNotAllowed);
+
+
 
 // handle 500
 app.use(handle500);

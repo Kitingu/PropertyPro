@@ -10,8 +10,8 @@
             "url": "https://github.com/kitingu"
         }
     },
-    "host": "bendeh-property.herokuapp.com",
-    "basePath": "/api/v1",
+    "host": "propertypro-v2.herokuapp.com",
+    "basePath": "/api/v2",
     "schemes": [
         "http",
         "https"
@@ -20,7 +20,7 @@
         "/auth/signup": {
             "post": {
                 "summary": "Creates a new user",
-                "description": "The auth/signin endpoint registes a user On success the response code is `201` for `Created`.",
+                "description": "The auth/signin endpoint registers a user On success the response code is `201` for `Created`.",
                 "consumes": [
                     "application/json"
                 ],
@@ -130,13 +130,6 @@
                         "in": "formData",
                         "required": true,
                         "type": "integer"
-                    },
-                    {
-                        "name": "contact",
-                        "in": "formData",
-                        "description": "owners phone number",
-                        "required": true,
-                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -392,7 +385,7 @@
                 "lastname": {
                     "type": "string"
                 },
-                "role": {
+                "phoneNumber": {
                     "type": "string"
                 },
                 "email": {
