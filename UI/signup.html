@@ -25,7 +25,7 @@
         </ul>
     </header>
 
-    <form class="form-main" action="login.html">
+    <form class="form-main" method="POST">
         <fieldset>
             <legend>Welcome to PropertyPro</legend>
 
@@ -35,13 +35,19 @@
 
             <input type="email" placeholder="Email" id="email">
 
+            <label for="isAgent"> sign up as an Agent??
+            </label>
+            <input type="checkbox" name="isAgent" id="isAgent">
+            <br>
+
             <input type="password" placeholder="Password" id="password" required>
 
             <input type="text" placeholder="Phone number" id="phone" required>
 
-            <input type="text" placeholder="Address" id="address" required>
+            <p id="errors"></p>
 
-            <button class="btn-primary" type="submit">Sign Up</button>
+
+            <button class="btn-primary" type="submit" onclick="signUp()">Sign Up</button>
 
             <a href="./login.html">I am already a member</a>
         </fieldset>
@@ -53,6 +59,7 @@
         <p>Design by <a href="github.com/kitingu">Kitingu</a> Copyright &copy; <span id="year"></span></p>
     </footer>
     <script src="./scripts/main.js"></script>
+    <script src="./scripts/user-signup.js"></script>
 </body>
 
 </html>
