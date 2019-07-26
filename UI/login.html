@@ -24,7 +24,7 @@
         </ul>
     </header>
     <div class="wrapper">
-        <form class="form-main login" action="index.html">
+        <form class="form-main login" method="POST">
             <fieldset>
                 <legend>Welcome Back</legend>
 
@@ -33,8 +33,9 @@
 
                 <label for="password">Password </label>
                 <input type="password" id="password" required>
-
-                <button class="btn-primary" on type="submit">Log In</button>
+                
+                <p id="errors"></p>
+                <button class="btn-primary" onclick="signIn()" type="submit">Log In</button>
 
                 <p>
                     <a href="#" class="#forgetPassword" onclick="forgotPassword()">Forgot password?</a>
@@ -70,6 +71,7 @@
     </footer>
     <script src="./scripts/main.js"></script>
     <script src="./scripts/forgot-modal.js"></script>
+    <script src="./scripts/login.js"></script>
 </body>
 
 </html>
