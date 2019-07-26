@@ -28,33 +28,34 @@
 
     <div class="advert">
         <h3>Add a new advert</h3>
-        <form action="specific_ad.html">
-            <p>
-                <input type="text" placeholder="Price" required name="name">
-            </p>
-            <p>
-
-                <input type="text" placeholder="State" required name="company">
-            </p>
-            <p>
-                <input type="email" placeholder="City" required name="email">
-            </p>
-            <p>
-                <input type="text" placeholder="Address" required name="phone">
-            </p>
-            <p>
-                <input type="text" placeholder="Type" required name="phone">
-            </p>
+        <form method="POST">
 
             <p>
-                <input type="text" placeholder="additional-info" name="additional-info">
+
+                <input type="text" placeholder="State" required id="state">
             </p>
+            <p>
+                <input type="text" placeholder="City" required id="city">
+            </p>
+            <p>
+                <input type="text" placeholder="Price" required id="price">
+            </p>
+            <p>
+                <input type="text" placeholder="Address" required id="address">
+            </p>
+            <p>
+                <input type="text" placeholder="Type" required id="type">
+            </p>
+
             <div class="upload-btn-wrapper">
                 <button class="btn-upload">Upload picture</button>
-                <input type="file" name="myfile" />
+                <input type="file" name="myfile" id="image" />
             </div>
+
+            <p id="errors"></p>
             <p>
-                <button class="btn">Submit</button>
+
+                <button class="btn" onclick="createAdvert()">Submit</button>
             </p>
         </form>
     </div>
@@ -64,6 +65,7 @@
         <p>Design by <a href="github.com/kitingu">Kitingu</a> Copyright &copy; <span id="year"></span></p>
     </footer>
     <script src="./scripts/main.js"></script>
+    <script src="./scripts/create-advert.js"></script>
 </body>
 
 </html>
