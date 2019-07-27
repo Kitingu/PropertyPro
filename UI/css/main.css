@@ -44,7 +44,7 @@ a.logo span {
     font-size: 100%;
     position: absolute;
     top: 0;
-    margin-bottom:20%;
+    margin-bottom: 20%;
 }
 
 .header ul {
@@ -65,7 +65,7 @@ a.logo span {
 
 .header li a:hover, .header .menu-btn:hover {
     background-color: #f4f4f4;
-    color:#C69963;
+    color: #C69963;
 }
 
 .header .logo {
@@ -187,6 +187,12 @@ a.logo span {
     }
 }
 
+i {
+    padding: 8px;
+    color: #B28451;
+
+}
+
 /* banner */
 
 .heading {
@@ -261,6 +267,7 @@ input[type="text"], input[type="email"], input[type="password"] {
 input[type="text"], input[type="email"], input[type="password"] {
     background: #d2d9dd;
 }
+
 #buttons input[type="text"] {
     width: 100px;
 }
