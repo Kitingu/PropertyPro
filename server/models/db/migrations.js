@@ -1,11 +1,8 @@
-const { db } = require('./db')
+const { db } = require('./db');
+
 const migrations = async () => {
-    const tables = `
-      DROP TABLE IF EXISTS users CASCADE;
-      DROP TABLE IF EXISTS properties CASCADE;
-      DROP TABLE IF EXISTS flags CASCADE;
-      DROP TABLE IF EXISTS images CASCADE;
-      CREATE TABLE
+  const tables = `
+      CREATE TABLE IF NOT EXISTS
       users(
         user_id serial PRIMARY KEY,
         firstname VARCHAR (200) NOT NULL,
@@ -17,7 +14,7 @@ const migrations = async () => {
         isAdmin BOOL DEFAULT 'false',
         created_on TIMESTAMP NOT NULL DEFAULT NOW()
     );
-    
+
 
   CREATE TABLE IF NOT EXISTS
     properties(
@@ -52,13 +49,13 @@ const migrations = async () => {
         added_on TIMESTAMP NOT NULL DEFAULT NOW()
           );`;
 
-    try {
-        await db.basicQuery(tables);
-    } catch (err) {
-        console.log(err.stack);
-    }
+  try {
+    await db.basicQuery(tables);
+  } catch (err) {
+    console.log(err.stack);
+  }
 };
 
 (async () => {
-    await migrations();
+  await migrations();
 })();
