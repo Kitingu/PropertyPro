@@ -24,7 +24,7 @@
 	},
 	"homepage": "https://github.com/Kitingu/PropertyPro#readme",
 	"dependencies": {
-		"@hapi/joi": "^15.1.0",
+		"@hapi/joi": "^15.1.1",
 		"babel-cli": "^6.26.0",
 		"babel-preset-env": "^1.7.0",
 		"babel-watch": "^7.0.0",
